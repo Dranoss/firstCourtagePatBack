@@ -1,12 +1,19 @@
 package com.patrimoine.website.entity;
 
 
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.List;
 
 
 
+@Entity
  public class User {
 
-    private int id;
+    @Id
+   // @GeneratedValue= (GenerationType.AUTO)
+    private Long id;
     private int phoneNumber;
     private int siretNumber;
     private String firstName="";
@@ -16,43 +23,18 @@ package com.patrimoine.website.entity;
     private String companyName="";
     private String role="";
 
-    private Address address;
-    private BankAccount account ;
-    private  Type typeUser;
+
+    @OneToMany(mappedBy = "user")
+    private List<BankAccount> bankAccounts ;
+
+
+    @OneToMany (mappedBy = "user")
+    private List<Address> addresses;
 
     public User(){
-
-
-
     }
 
-    public User(int id, int phoneNumber, int siretNumber,
-                     String firstName, String lastName,
-                     String email, String password,
-                     String companyName, String role, Type type, Address address, BankAccount account) {
-        this.id = id;
-        this.phoneNumber = phoneNumber;
-        this.siretNumber = siretNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.companyName = companyName;
-        this.role = role;
-
-        this.account = account;
-        this.address = address;
-
-        if (type== null){
-            System.out.println("creation du user ==> le type user n est pas défini");
-
-        }
-        else {
-            this.typeUser = type;
-        }
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -120,7 +102,7 @@ package com.patrimoine.website.entity;
         this.role = role;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
