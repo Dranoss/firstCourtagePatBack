@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class TypeUser {
 
-
+MNDS,CDSCK,DSC
     @Id
 //    @GeneratedValue= (GenerationType.IDENTITY)
     private  Long id;
