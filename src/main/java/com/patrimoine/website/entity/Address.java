@@ -7,18 +7,28 @@ import javax.persistence.*;
 public class Address {
 
     @Id
-//    @GeneratedValue= (GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int numberAdress;
+    private int numberAddress;
     private int zipCode;
     private String street = "";
     private String city = "";
 
     @ManyToOne()
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="address_id")
     private User user;
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Address() {
     }
@@ -29,12 +39,12 @@ public class Address {
 
 
 
-    public int getNumberAdress() {
-        return numberAdress;
+    public int getNumberAddress() {
+        return numberAddress;
     }
 
-    public void setNumberAdress(int numberAdress) {
-        this.numberAdress = numberAdress;
+    public void setNumberAddress(int numberAdress) {
+        this.numberAddress = numberAdress;
     }
 
     public int getZipCode() {

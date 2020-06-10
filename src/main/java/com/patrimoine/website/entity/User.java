@@ -1,18 +1,17 @@
 package com.patrimoine.website.entity;
 
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.List;
 
+import static javax.persistence.GenerationType.*;
 
 
 @Entity
  public class User {
 
     @Id
-   // @GeneratedValue= (GenerationType.AUTO)
+    @GeneratedValue (strategy =  IDENTITY)
     private Long id;
     private int phoneNumber;
     private int siretNumber;
@@ -23,16 +22,55 @@ import java.util.List;
     private String companyName="";
     private String role="";
 
+    @OneToMany(mappedBy = "user")
+    private  List<Address> addresses;
 
     @OneToMany(mappedBy = "user")
     private List<BankAccount> bankAccounts ;
 
+    @OneToMany(mappedBy = "user")
+    private List<Project> projects;
 
-    @OneToMany (mappedBy = "user")
-    private List<Address> addresses;
+    @ManyToOne
+    @JoinColumn(name="user_id" )
+    private TypeUser typeUser;
+
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> adresses) {
+        this.addresses = adresses;
+    }
+
+    public List<BankAccount> getBankAccounts() {
+        return bankAccounts;
+    }
+
+    public void setBankAccounts(List<BankAccount> bankAccounts) {
+        this.bankAccounts = bankAccounts;
+    }
+
+    public TypeUser getTypeUser() {
+        return typeUser;
+    }
+
+    public void setTypeUser(TypeUser typeUser) {
+        this.typeUser = typeUser;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
 
     public User(){
     }
+
 
     public Long getId() {
         return id;

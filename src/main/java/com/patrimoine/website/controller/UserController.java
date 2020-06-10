@@ -5,39 +5,36 @@ package com.patrimoine.website.controller;
 // controllers  mapping et responsebody pour les routes qui viennent de angular
 
 import com.patrimoine.website.entity.User;
-import com.patrimoine.website.repository.UserRepository;
+import com.patrimoine.website.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-@Controller
+@RestController
+@RequestMapping()
 public class UserController {
 
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @GetMapping("/users")
-    @ResponseBody
     public List<User> getUsers() {
-        return  userRepository.findAll();
+        return  userService.getUsers();
 
     }
-
-    @PostMapping("/addUsers")
-    @ResponseBody
-    public User  addUser(User user) {
-        return         userRepository.save(user);
-    }
-
     @GetMapping("/user")
-    @ResponseBody
-    public Optional<User> getUser(@RequestParam Long id) {
-        return  userRepository.findById(id);
+    public Optional<User> getUser(Long id){
+      return    userService.getUser(id);
     }
+
+    @PostMapping("/user")
+    public User  addUser(User user) {
+
+        return  userService.addUser(user);
+    }
+
 
     /*@GetMapping("/userByName")
     public Optional<User> getUser(@RequestParam String name) {
@@ -45,9 +42,10 @@ public class UserController {
         }
 */
 
-    @PostMapping("users/delUser")
+    @PostMapping("userdelete")
     public void  deleteUser(@RequestParam Long id) {
-        userRepository.deleteById(id);
+
+        userService.deleteUser(id);
     }
 
 

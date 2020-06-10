@@ -9,7 +9,7 @@ public class BankAccount {
 
 
     @Id
-    //@GeneratedValue= (GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String iban ;
     private String bic ;
@@ -18,9 +18,16 @@ public class BankAccount {
 
 
     @ManyToOne()
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="bankAccount_id")
     private User user ;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
