@@ -19,19 +19,50 @@ public class UserService {
 
 
     public List<User> getUsers() {
+
         return  userRepository.findAll();
     }
 
+    public List<User> getUsersAsc() {
+
+        return  userRepository.findAllByOrderByLastNameAsc();
+    }
+    public List<User> getUsersDsc() {
+
+        return  userRepository.findAllByOrderByLastNameDesc();
+    }
+
     public Optional<User> getUser(Long id) {
+
         return  userRepository.findById(id);
     }
+    public Optional<User> getUserByName(String name) {
+
+        return Optional.ofNullable(userRepository.findUserByLastName(name));
+    }
+    public Optional<User> getUserByCompanyName(String name) {
+
+        return Optional.ofNullable(userRepository.findUserByCompanyName(name));
+    }
+    public Optional<User> getUserByRole(String role) {
+
+        return Optional.ofNullable(userRepository.findUserByRole(role));
+    }
+
+    public Optional<User> getUserByPhoneNumber(int number) {
+
+        return Optional.ofNullable(userRepository.findUserByPhoneNumber(number));
+    }
+
     public User  addUser(@RequestBody User user)
     {
+
         return  userRepository.save(user);
     }
     public void  deleteUser(@RequestParam Long id) {
 
         userRepository.deleteById(id);
     }
+
 
 }

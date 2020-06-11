@@ -22,4 +22,11 @@ import java.util.Optional;
 @Repository
 public interface UserRepository   extends JpaRepository<User , Long > {
 
+    User findUserByLastName(String name);
+    User findUserByCompanyName(String companyName);
+    User findUserByRole(String role);
+    User findUserByPhoneNumber(int number);
+    List<User> findAllByOrderByLastNameAsc();
+    List<User> findAllByOrderByLastNameDesc();
+
 }

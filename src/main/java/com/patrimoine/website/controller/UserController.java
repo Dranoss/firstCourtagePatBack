@@ -24,9 +24,44 @@ public class UserController {
         return  userService.getUsers();
 
     }
+
+    @GetMapping("/usersAsc")
+    public List<User> getUsersAsc() {
+        return  userService.getUsersAsc();
+    }
+
+    @GetMapping("/usersDsc")
+    public List<User> getUsersDsc() {
+        return  userService.getUsersDsc();
+    }
     @GetMapping("/user")
     public Optional<User> getUser(Long id){
-      return    userService.getUser(id);
+
+        return    userService.getUser(id);
+    }
+
+    @GetMapping("/userByName")
+    public Optional<User> getUserByName(String name){
+
+        return    userService.getUserByName(name);
+    }
+
+    @GetMapping("/userByCompanyName")
+    public Optional<User> getUserByCompanyName(String name){
+
+        return    userService.getUserByCompanyName(name);
+    }
+
+    @GetMapping("/userByRole")
+    public Optional<User> getUserByRole(String role){
+
+        return    userService.getUserByRole(role);
+    }
+
+    @GetMapping("/userByPhoneNumber")
+    public Optional<User> getUserByPhoneNumber(int number){
+
+        return    userService.getUserByPhoneNumber(number);
     }
 
     @PostMapping("/user")
