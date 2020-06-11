@@ -1,4 +1,4 @@
 package com.patrimoine.website.entity;
 
-public class Document {
+public class Status {
 }

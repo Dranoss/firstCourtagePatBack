@@ -1,36 +1,39 @@
 package com.patrimoine.website.entity;
 
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class BankAccount {
 
 
-
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String iban ;
     private String bic ;
     private String ownerFullName;
     private String bankName;
 
-    public BankAccount(int id, String test){
-        this.id = id;
-        this.bankName = test;
 
+    @ManyToOne()
+    @JoinColumn(name="bankAccount_id")
+    private User user ;
 
+    public User getUser() {
+        return user;
     }
 
-    public BankAccount(int id, String iban, String bic, String ownerFullName, String bankName) {
-        this.id = id;
-        this.iban = iban;
-        this.bic = bic;
-        this.ownerFullName = ownerFullName;
-        this.bankName = bankName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

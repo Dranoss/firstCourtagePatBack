@@ -1,37 +1,40 @@
 package com.patrimoine.website.entity;
 
+import javax.persistence.*;
+import java.util.List;
 
-public class TypeProject extends Type {
+@Entity
+public class TypeProject {
+
+    @Id
+    private Long id;
+    private String name;
 
 
+    @OneToMany
+    private List<Project> projects;
 
-
-    private int id;
-    private String name = "";
-
-    public TypeProject(int id, String name, int id1, String name1) {
-        super(id, name);
-        this.id = id1;
-        this.name = name1;
-    }
-
-    @Override
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    @Override
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

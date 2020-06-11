@@ -1,47 +1,50 @@
 package com.patrimoine.website.entity;
 
 
+import javax.persistence.*;
 
+@Entity
 public class Address {
 
-
-    private int id;
-    private int numberAdress;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private int numberAddress;
     private int zipCode;
     private String street = "";
     private String city = "";
 
+    @ManyToOne()
+    @JoinColumn(name="address_id")
+    private User user;
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Address() {
     }
 
-    public Address(int id, int numberAdress, int zipCode, String street, String city) {
-        this.id = id;
-        this.numberAdress = numberAdress;
-        this.zipCode = zipCode;
-        this.street = street;
-        this.city = city;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    /*  id en auto increment
-    public void setId(int id) {
-        this.id = id;
-    }*/
 
 
-    public int getNumberAdress() {
-        return numberAdress;
+    public int getNumberAddress() {
+        return numberAddress;
     }
 
-    public void setNumberAdress(int numberAdress) {
-        this.numberAdress = numberAdress;
+    public void setNumberAddress(int numberAdress) {
+        this.numberAddress = numberAdress;
     }
 
     public int getZipCode() {

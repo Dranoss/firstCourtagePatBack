@@ -1,67 +1,89 @@
 package com.patrimoine.website.entity;
 
+import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
 
-
-
+@Entity
 public class Project {
 
-
-    private int id;
-    private int amount;
-    private Date openDate;
-    private Date closeDate;
-
-    private TypeProject typeProject;
-    private List<Document> documents;
-    private GradeStatus status ;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private Long amount;
+    private Date dateOpened;
+    private Date dateClosed;
 
 
-    public Project(int id, int amount, Date openDate, Date closeDate) {
-        this.id = id;
-        this.amount = amount;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private User user ;
 
-        if (openDate == null){
-            System.out.println("creation de projet sans date d ouverture !");
+    @ManyToOne
+    @JoinColumn(name = "typeProject_id")
+    private TypeProject typeProject ;
 
-        }else{
-            this.openDate = openDate;
-        }
 
-        this.closeDate = closeDate;
+    public TypeProject getTypeProject() {
+        return typeProject;
     }
 
-    public int getId() {
+    public void setTypeProject(TypeProject typeProject) {
+        this.typeProject = typeProject;
+    }
+
+    public Project() {
+
+    }
+
+
+
+    public Long getId() {
         return id;
     }
 
-    /* id auto incrementé
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    */
-    public int getAmount() {
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 
-    public Date getOpenDate() {
-        return openDate;
+    public Date getDateOpened() {
+        return dateOpened;
     }
 
-    public void setOpenDate(Date openDate) {
-        this.openDate = openDate;
+    public void setDateOpened(Date dateOpened) {
+        this.dateOpened = dateOpened;
     }
 
-    public Date getCloseDate() {
-        return closeDate;
+    public Date getDateClosed() {
+        return dateClosed;
     }
 
-    public void setCloseDate(Date closeDate) {
-        this.closeDate = closeDate;
+    public void setDateClosed(Date dateClosed) {
+        this.dateClosed = dateClosed;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }
