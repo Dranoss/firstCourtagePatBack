@@ -1,7 +1,7 @@
-package com.patrimoine.website.Service;
+package com.patrimoine.website.webServices.service;
 
-import com.patrimoine.website.Entity.Project;
-import com.patrimoine.website.Repository.ProjectRepository;
+import com.patrimoine.website.webServices.entity.Project;
+import com.patrimoine.website.webServices.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

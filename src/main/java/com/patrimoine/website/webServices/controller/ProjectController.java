@@ -1,7 +1,7 @@
-package com.patrimoine.website.Controller;
+package com.patrimoine.website.webServices.controller;
 
-import com.patrimoine.website.Entity.Project;
-import com.patrimoine.website.Service.ProjectService;
+import com.patrimoine.website.webServices.entity.Project;
+import com.patrimoine.website.webServices.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

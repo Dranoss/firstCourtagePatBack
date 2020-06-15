@@ -1,4 +1,4 @@
-package com.patrimoine.website.Entity;
+package com.patrimoine.website.webServices.entity;
 
 import javax.persistence.*;
 import java.util.Date;
