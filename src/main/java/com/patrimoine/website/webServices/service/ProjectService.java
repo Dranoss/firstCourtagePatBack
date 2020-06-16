@@ -5,7 +5,6 @@ import com.patrimoine.website.webServices.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +15,7 @@ public class ProjectService {
     private ProjectRepository projectRepository;
 
     public List<Project> getAllProjects(){
-        List<Project> projectList = new ArrayList<>();
-        projectRepository.findAll().forEach(projectList::add);
-        return projectList;
+        return projectRepository.findAll();
     }
 
     public Project getProjectById(Long id){
@@ -29,12 +26,12 @@ public class ProjectService {
         return null;
     }
 
-    public void saveProject(Project project){
-        projectRepository.save(project);
+    public Project saveProject(Project project){
+        return projectRepository.save(project);
     }
 
-    public void updateProject(Project project){
-        projectRepository.save(project);
+    public Project updateProject(Project project){
+        return projectRepository.save(project);
     }
 
     public void deleteProject(Long id){

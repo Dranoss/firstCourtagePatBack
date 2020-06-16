@@ -16,10 +16,8 @@ public class UserService {
     private UserRepository userRepository;
 
     // GET ALL USERS
-    List<User> userList = new ArrayList<>();
     public List<User> getAllUsers(){
-        userRepository.findAll();
-        return userList;
+        return userRepository.findAll();
     }
 
     // GET USER BY HIS ID
