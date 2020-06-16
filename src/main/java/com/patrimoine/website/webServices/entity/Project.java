@@ -6,19 +6,22 @@ import java.util.Date;
 @Entity
 public class Project {
 
+    //Primary Key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+    //Foreign Keys
     @Column(name = "client_id")
-    private int clientID;
-    @Column(name = "project_type")
-    private int projectType;
+    private Long clientID;
+    @Column(name = "project_type_id")
+    private Long projectTypeId;
     @Column(name = "status_id")
-    private int statusId;
+    //Properties
+    private Long statusId;
     @Column(name = "project_name")
     private String projectName;
     @Column(name = "project_amount")
-    private int projectAmount;
+    private Long projectAmount;
     @Column(name = "creation_date")
     private Date creationDate;
     @Column(name = "closing_date")
@@ -26,35 +29,35 @@ public class Project {
 
     public Project(){}
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getClientID() {
+    public Long getClientID() {
         return clientID;
     }
 
-    public void setClientID(int clientID) {
+    public void setClientID(Long clientID) {
         this.clientID = clientID;
     }
 
-    public int getProjectType() {
-        return projectType;
+    public Long getProjectTypeId() {
+        return projectTypeId;
     }
 
-    public void setProjectType(int projectType) {
-        this.projectType = projectType;
+    public void setProjectTypeId(Long projectTypeId) {
+        this.projectTypeId = projectTypeId;
     }
 
-    public int getStatusId() {
+    public Long getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(int statusId) {
+    public void setStatusId(Long statusId) {
         this.statusId = statusId;
     }
 
@@ -66,11 +69,11 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public int getProjectAmount() {
+    public Long getProjectAmount() {
         return projectAmount;
     }
 
-    public void setProjectAmount(int projectAmount) {
+    public void setProjectAmount(Long projectAmount) {
         this.projectAmount = projectAmount;
     }
 

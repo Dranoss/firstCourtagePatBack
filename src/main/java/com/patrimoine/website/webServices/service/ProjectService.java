@@ -21,7 +21,7 @@ public class ProjectService {
         return projectList;
     }
 
-    public Project getProjectById(int id){
+    public Project getProjectById(Long id){
         Optional<Project> optionalProject = projectRepository.findById(id);
         if(optionalProject.isPresent()){
             return optionalProject.get();
@@ -37,7 +37,7 @@ public class ProjectService {
         projectRepository.save(project);
     }
 
-    public void deleteProject(int id){
+    public void deleteProject(Long id){
         projectRepository.deleteById(id);
     }
 

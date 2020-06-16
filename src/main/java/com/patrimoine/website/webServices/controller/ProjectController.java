@@ -7,34 +7,35 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping(value = "/projects")
 @RestController
 public class ProjectController {
 
     @Autowired
     private ProjectService projectService;
 
-    @GetMapping(value = "/projects")
+    @GetMapping
     public List<Project> getProjects(){
         return projectService.getAllProjects();
     }
 
-    @GetMapping(value = "/projects/{id}")
-    public Project getProjectById(@PathVariable int id){
+    @GetMapping(value = "/{id}")
+    public Project getProjectById(@PathVariable Long id){
         return projectService.getProjectById(id);
     }
 
-    @PostMapping(value = "/projects/add")
-    public void addProject(Project project){
+    @PostMapping
+    public void addProject(@RequestBody Project project){
         projectService.saveProject(project);
     }
 
-    @PutMapping(value = "/projects/edit")
-    public void editProject(Project project){
+    @PutMapping(value = "/{id}")
+    public void editProject(@RequestBody Project project){
         projectService.updateProject(project);
     }
 
-    @DeleteMapping(value = "projects/delete")
-    public void deleteProject(int id){
+    @DeleteMapping(value = "/{id}")
+    public void deleteProject(@PathVariable Long id){
         projectService.deleteProject(id);
     }
 }
