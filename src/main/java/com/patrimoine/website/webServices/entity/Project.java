@@ -10,12 +10,6 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //Foreign Keys
-    @Column(name = "client_id")
-    private Long clientID;
-    @Column(name = "project_type_id")
-    private Long projectTypeId;
-    @Column(name = "status_id")
     //Properties
     private Long statusId;
     @Column(name = "project_name")
@@ -35,22 +29,6 @@ public class Project {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getClientID() {
-        return clientID;
-    }
-
-    public void setClientID(Long clientID) {
-        this.clientID = clientID;
-    }
-
-    public Long getProjectTypeId() {
-        return projectTypeId;
-    }
-
-    public void setProjectTypeId(Long projectTypeId) {
-        this.projectTypeId = projectTypeId;
     }
 
     public Long getStatusId() {

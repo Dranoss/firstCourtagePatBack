@@ -11,12 +11,6 @@ public class User {
     private Long id;
     // FOREIGN KEYS
     // TO DO OneToMany and ManyToMany
-    @Column(name = "user_address_id")
-    private Long UserAddressId;
-    @Column(name = "user_rib_id")
-    private Long userRibId;
-    @Column(name = "user_type_id")
-    private Long userTypeId;
     // PROPERTIES
     @Column(name = "last_name")
     private String lastName;
@@ -81,18 +75,6 @@ public class User {
         this.role = role;
     }
 
-    public void setUserAddressId(Long userAddressId) {
-        UserAddressId = userAddressId;
-    }
-
-    public void setUserRibId(Long userRibId) {
-        this.userRibId = userRibId;
-    }
-
-    public void setUserTypeId(Long userTypeId) {
-        this.userTypeId = userTypeId;
-    }
-
     public Long getId() {
         return id;
     }
@@ -131,17 +113,5 @@ public class User {
 
     public String getRole() {
         return role;
-    }
-
-    public Long getUserAddressId() {
-        return UserAddressId;
-    }
-
-    public Long getUserRibId() {
-        return userRibId;
-    }
-
-    public Long getUserTypeId() {
-        return userTypeId;
     }
 }
