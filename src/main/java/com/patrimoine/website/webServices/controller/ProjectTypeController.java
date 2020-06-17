@@ -12,7 +12,7 @@ import java.util.List;
 public class ProjectTypeController {
 
     @Autowired
-    ProjectTypeService projectTypeService;
+    private ProjectTypeService projectTypeService;
 
     @GetMapping
     public List<ProjectType> getProjectTypes(){
