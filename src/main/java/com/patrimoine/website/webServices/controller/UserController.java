@@ -28,9 +28,9 @@ public class UserController {
         return userService.saveUser(user);
     }
     // UPDATE USER
-    @PutMapping
-    public User putUser(@RequestBody User user){
-        return userService.updateUser(user);
+    @PutMapping(value = "/{id}")
+    public User putUser(@RequestBody User user, @PathVariable Long id){
+        return userService.updateUser(user, id);
     }
     // DELETE USER{
     @DeleteMapping(value = "/{id}")

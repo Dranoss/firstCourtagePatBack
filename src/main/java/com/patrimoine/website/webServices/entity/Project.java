@@ -11,14 +11,9 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     //Properties
-    private Long statusId;
-    @Column(name = "project_name")
-    private String projectName;
-    @Column(name = "project_amount")
-    private Long projectAmount;
-    @Column(name = "creation_date")
+    private String name;
+    private Long amount;
     private Date creationDate;
-    @Column(name = "closing_date")
     private Date closingDate;
 
     public Project(){}
@@ -31,28 +26,20 @@ public class Project {
         this.id = id;
     }
 
-    public Long getStatusId() {
-        return statusId;
+    public String getName() {
+        return name;
     }
 
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
+    public void setName(String projectName) {
+        this.name = projectName;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public Long getAmount() {
+        return amount;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public Long getProjectAmount() {
-        return projectAmount;
-    }
-
-    public void setProjectAmount(Long projectAmount) {
-        this.projectAmount = projectAmount;
+    public void setAmount(Long projectAmount) {
+        this.amount = projectAmount;
     }
 
     public Date getCreationDate() {

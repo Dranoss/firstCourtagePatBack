@@ -35,7 +35,7 @@ public class UserService {
     }
 
     // UPDATE USER
-    public User updateUser(User user){
+    public User updateUser(User user, Long id){
         return userRepository.save(user);
     }
 

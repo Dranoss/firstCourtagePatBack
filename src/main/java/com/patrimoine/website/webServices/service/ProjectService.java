@@ -30,7 +30,7 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    public Project updateProject(Project project){
+    public Project updateProject(Project project, Long id){
         return projectRepository.save(project);
     }
 
