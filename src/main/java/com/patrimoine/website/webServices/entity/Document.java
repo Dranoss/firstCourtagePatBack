@@ -6,15 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class ProjectStatus {
+public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Long ranking;
 
-    public ProjectStatus() {
+    public Document() {
     }
 
     public Long getId() {
@@ -31,13 +30,5 @@ public class ProjectStatus {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getRanking() {
-        return ranking;
-    }
-
-    public void setRanking(Long ranking) {
-        this.ranking = ranking;
     }
 }
