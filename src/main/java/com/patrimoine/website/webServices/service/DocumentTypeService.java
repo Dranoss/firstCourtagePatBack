@@ -1,5 +1,6 @@
 package com.patrimoine.website.webServices.service;
 
+import com.patrimoine.website.webServices.entity.Document;
 import com.patrimoine.website.webServices.entity.DocumentType;
 import com.patrimoine.website.webServices.repository.DocumentTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;

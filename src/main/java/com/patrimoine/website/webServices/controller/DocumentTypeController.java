@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping
+@RequestMapping(value = "/documentTypes")
 @RestController
 public class DocumentTypeController {
 
