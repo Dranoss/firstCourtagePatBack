@@ -25,17 +25,17 @@ public class DocumentController {
     }
 
     @PostMapping
-    public Document post(Document document){
+    public Document post(@RequestBody Document document){
         return documentService.create(document);
     }
 
     @PutMapping(value = "/{id}")
-    public Document put(Document document, Long id){
+    public Document put(@RequestBody Document document, @PathVariable Long id){
         return documentService.update(document, id);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(Long id){
+    public void delete(@PathVariable Long id){
         documentService.delete(id);
     }
 }
