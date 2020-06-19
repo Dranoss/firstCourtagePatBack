@@ -13,9 +13,9 @@ public class dataSourceConfiguration{
     @Bean
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.username(System.getenv("db_username"));
-        dataSourceBuilder.password(System.getenv("db_password"));
-        dataSourceBuilder.url(System.getenv("db_url"));
+        dataSourceBuilder.username(System.getenv("courtage_db_username"));
+        dataSourceBuilder.password(System.getenv("courtage_db_password"));
+        dataSourceBuilder.url(System.getenv("courtage_db_url"));
 
         return dataSourceBuilder.build();
     }
