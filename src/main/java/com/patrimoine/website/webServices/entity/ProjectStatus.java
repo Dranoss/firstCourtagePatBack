@@ -11,6 +11,9 @@ public class ProjectStatus {
     private Long id;
     @OneToMany(fetch = FetchType.LAZY)
     private List<Project> projects;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id")
+    private ProjectType projectType;
     private String name;
     private Long ranking;
 
@@ -47,5 +50,13 @@ public class ProjectStatus {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public ProjectType getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(ProjectType projectType) {
+        this.projectType = projectType;
     }
 }

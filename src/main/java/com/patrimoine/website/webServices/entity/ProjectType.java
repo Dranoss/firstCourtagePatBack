@@ -12,6 +12,8 @@ public class ProjectType {
     private Long id;
     @OneToMany(fetch = FetchType.LAZY)
     private List<Project> projects;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<ProjectStatus> projectStatuses;
     //Properties
     private String name;
 
@@ -39,5 +41,13 @@ public class ProjectType {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public List<ProjectStatus> getProjectStatuses() {
+        return projectStatuses;
+    }
+
+    public void setProjectStatuses(List<ProjectStatus> projectStatuses) {
+        this.projectStatuses = projectStatuses;
     }
 }
