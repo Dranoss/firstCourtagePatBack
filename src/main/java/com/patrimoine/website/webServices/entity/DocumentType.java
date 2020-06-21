@@ -12,6 +12,9 @@ public class DocumentType {
     private String name;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "documentType")
     private List<Document> documents;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_type")
+    private ProjectType projectType;
 
     public DocumentType() {
     }
@@ -38,5 +41,13 @@ public class DocumentType {
 
     public void setDocuments(List<Document> documents) {
         this.documents = documents;
+    }
+
+    public ProjectType getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(ProjectType projectType) {
+        this.projectType = projectType;
     }
 }

@@ -14,6 +14,8 @@ public class ProjectType {
     private List<Project> projects;
     @OneToMany(fetch = FetchType.LAZY)
     private List<ProjectStatus> projectStatuses;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<DocumentType> documentTypes;
     //Properties
     private String name;
 
@@ -49,5 +51,13 @@ public class ProjectType {
 
     public void setProjectStatuses(List<ProjectStatus> projectStatuses) {
         this.projectStatuses = projectStatuses;
+    }
+
+    public List<DocumentType> getDocumentTypes() {
+        return documentTypes;
+    }
+
+    public void setDocumentTypes(List<DocumentType> documentTypes) {
+        this.documentTypes = documentTypes;
     }
 }
