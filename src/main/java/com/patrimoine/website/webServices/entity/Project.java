@@ -2,6 +2,7 @@ package com.patrimoine.website.webServices.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Project {
@@ -16,6 +17,8 @@ public class Project {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id")
     private ProjectStatus projectStatus;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Document> documents;
     //Properties
     private String name;
     private Long amount;
@@ -78,5 +81,13 @@ public class Project {
 
     public void setProjectStatus(ProjectStatus projectStatus) {
         this.projectStatus = projectStatus;
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
     }
 }

@@ -12,6 +12,9 @@ public class Document {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
     private DocumentType documentType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     public Document() {
     }
@@ -38,5 +41,13 @@ public class Document {
 
     public void setDocumentType(DocumentType documentType) {
         this.documentType = documentType;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }
