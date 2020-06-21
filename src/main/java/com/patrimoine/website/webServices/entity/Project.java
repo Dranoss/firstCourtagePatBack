@@ -10,6 +10,9 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id")
+    private ProjectType projectType;
     //Properties
     private String name;
     private Long amount;
@@ -56,5 +59,13 @@ public class Project {
 
     public void setClosingDate(Date closingDate) {
         this.closingDate = closingDate;
+    }
+
+    public ProjectType getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(ProjectType projectType) {
+        this.projectType = projectType;
     }
 }

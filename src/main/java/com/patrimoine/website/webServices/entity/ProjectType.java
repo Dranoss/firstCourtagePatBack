@@ -1,6 +1,7 @@
 package com.patrimoine.website.webServices.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class ProjectType {
@@ -9,6 +10,8 @@ public class ProjectType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Project> projects;
     //Properties
     private String name;
 
@@ -28,5 +31,13 @@ public class ProjectType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }
