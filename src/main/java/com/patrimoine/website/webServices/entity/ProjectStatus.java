@@ -1,9 +1,7 @@
 package com.patrimoine.website.webServices.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class ProjectStatus {
@@ -11,6 +9,8 @@ public class ProjectStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Project> projects;
     private String name;
     private Long ranking;
 
@@ -39,5 +39,13 @@ public class ProjectStatus {
 
     public void setRanking(Long ranking) {
         this.ranking = ranking;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }
