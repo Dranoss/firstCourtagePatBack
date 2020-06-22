@@ -25,13 +25,13 @@ public class ProjectController {
     }
 
     @PostMapping
-    public void addProject(@RequestBody Project project){
-        projectService.saveProject(project);
+    public Project postProject(@RequestBody Project project){
+        return projectService.saveProject(project);
     }
 
-    @PutMapping
-    public void editProject(@RequestBody Project project){
-        projectService.updateProject(project);
+    @PutMapping(value = "/{id}")
+    public Project putProject(@RequestBody Project project, @PathVariable Long id){
+        return projectService.updateProject(project, id);
     }
 
     @DeleteMapping(value = "/{id}")
