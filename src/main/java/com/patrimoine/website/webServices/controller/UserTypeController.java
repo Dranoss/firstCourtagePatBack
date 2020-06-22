@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@RequestMapping(value = "/user_types")
+@RequestMapping(value = "/user-types")
 @RestController
 public class UserTypeController {
 
@@ -34,14 +34,11 @@ public class UserTypeController {
 
     @PutMapping(value = "/{id}")
     public UserType putUserType(@PathVariable Long id, @RequestBody UserType userType){
-        if(id == userType.getId()){
-            return userTypeService.updateUserType(userType);
-        }
-        throw new ResponseStatusException(
-                HttpStatus.PRECONDITION_FAILED);
+        return userTypeService.updateUserType(userType, id);
     }
 
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserTypeById(@PathVariable Long id){
         userTypeService.deleteUserTypeById(id);
     }

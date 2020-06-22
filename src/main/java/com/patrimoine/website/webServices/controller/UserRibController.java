@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@RequestMapping(value = "/user_ribs")
+@RequestMapping(value = "/user-ribs")
 @RestController
 public class UserRibController {
 
@@ -35,13 +35,14 @@ public class UserRibController {
     @PutMapping(value = "/{id}")
     public UserRib putUserRib(@PathVariable Long id, @RequestBody UserRib userRib){
         if(id == userRib.getId()){
-            return userRibService.updateUserRib(userRib);
+            return userRibService.updateUserRib(userRib, id);
         }
         throw new ResponseStatusException(
                 HttpStatus.PRECONDITION_FAILED);
     }
 
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserRib(@PathVariable Long id){
         userRibService.deleteUserRib(id);
     }

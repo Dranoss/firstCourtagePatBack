@@ -9,7 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@RequestMapping(value = "/user_addresses")
+@RequestMapping(value = "/user-addresses")
 @RestController
 public class UserAddressController {
 
@@ -33,14 +33,11 @@ public class UserAddressController {
 
     @PutMapping(value = "/{id}")
     public UserAddress putUserAddress(@PathVariable Long id, @RequestBody UserAddress userAddress){
-        if(id == userAddress.getId()){
-            return userAddressService.updateUserAddress(userAddress);
-        }
-        throw new ResponseStatusException(
-                HttpStatus.PRECONDITION_FAILED);
+        return userAddressService.updateUserAddress(userAddress, id);
     }
 
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserAddress(@PathVariable Long id){
         userAddressService.deleteUserAddress(id);
     }
