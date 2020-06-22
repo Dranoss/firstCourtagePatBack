@@ -1,23 +1,33 @@
 package com.patrimoine.website.webServices.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class UserAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id")
     private Long id;
-    @Column(name = "street_number")
     private int streetNumber;
-    @Column(name = "street_name")
     private String streetName;
-    @Column(name = "zip_code")
     private String zipCode;
-    @Column(name = "city_name")
     private String cityName;
+    @OneToOne(mappedBy = "userAddress")
+    @JsonBackReference(value = "userAddress")
+    private User user;
 
     public UserAddress() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {

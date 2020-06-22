@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +27,7 @@ public class UserService {
         if (optionalUser.isPresent()){
             return optionalUser.get();
         }
-        return null;
+        throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED);
     }
 
     // CREATE USER
@@ -46,7 +45,7 @@ public class UserService {
     }
 
     // DELETE USER
-    public void deleteUserById(Long id){
-        userRepository.deleteById(id);
+    public void  deleteUserById(Long id){
+         userRepository.deleteById(id);
     }
 }

@@ -3,7 +3,10 @@ package com.patrimoine.website.webServices.controller;
 import com.patrimoine.website.webServices.entity.User;
 import com.patrimoine.website.webServices.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMessage;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,11 +32,16 @@ public class UserController {
     }
     // UPDATE USER
     @PutMapping(value = "/{id}")
-    public User putUser(@RequestBody User user, @PathVariable Long id){
-        return userService.updateUser(user, id);
+    public User putUser(@PathVariable Long id,@RequestBody User user){
+        if(id == user.getId()){
+            return userService.updateUser(user);
+        }
+        throw new ResponseStatusException(
+                HttpStatus.PRECONDITION_FAILED);
     }
     // DELETE USER{
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserById(@PathVariable Long id){
         userService.deleteUserById(id);
     }
