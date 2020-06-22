@@ -16,7 +16,7 @@ public class UserAddress {
     private String zipCode;
     private String cityName;
     @OneToOne(mappedBy = "userAddress")
-    @JsonBackReference(value = "userAddress")
+    @JsonManagedReference(value = "userAddress")
     private User user;
 
     public UserAddress() {
