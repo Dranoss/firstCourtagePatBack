@@ -16,21 +16,21 @@ public class User {
     @JoinColumn(name = "user_type_id")
     private UserType userType;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "userAddress")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference(value = "userAddress")
     @JoinColumn(name = "user_address_id", referencedColumnName = "id")
     private UserAddress userAddress;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "userRib")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference(value = "userRib")
     @JoinColumn(name = "user_rib_id", referencedColumnName = "id")
     private UserRib userRib;
 
-    //@OneToMany(fetch = FetchType.LAZY)
-    //@JsonBackReference
-    //@JoinColumn(name = "project_id")
-    //private Project project;
-
+   /* @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference(value = "userProject")
+    @JoinColumn(name = "project_id")
+    private Project project;
+    */
     private String lastName;
     private String firstName;
     private String email;
@@ -49,6 +49,14 @@ public class User {
         return userType;
     }
 
+    /*public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+    */
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
