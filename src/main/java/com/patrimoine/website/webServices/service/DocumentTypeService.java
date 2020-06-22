@@ -4,7 +4,9 @@ import com.patrimoine.website.webServices.entity.Document;
 import com.patrimoine.website.webServices.entity.DocumentType;
 import com.patrimoine.website.webServices.repository.DocumentTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +38,11 @@ public class DocumentTypeService {
 
     //Update
     public DocumentType update(DocumentType documentType, Long id){
-        return documentTypeRepository.save(documentType);
+        if(id == documentType.getId()){
+            return documentTypeRepository.save(documentType);
+        }
+        throw new ResponseStatusException(
+                HttpStatus.PRECONDITION_FAILED);
     }
 
     //Delete

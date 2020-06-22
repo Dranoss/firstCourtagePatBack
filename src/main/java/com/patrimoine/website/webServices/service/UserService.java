@@ -4,7 +4,9 @@ package com.patrimoine.website.webServices.service;
 import com.patrimoine.website.webServices.entity.User;
 import com.patrimoine.website.webServices.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,11 @@ public class UserService {
 
     // UPDATE USER
     public User updateUser(User user, Long id){
-        return userRepository.save(user);
+        if(id == user.getId()){
+            return userRepository.save(user);
+        }
+        throw new ResponseStatusException(
+                HttpStatus.PRECONDITION_FAILED);
     }
 
     // DELETE USER

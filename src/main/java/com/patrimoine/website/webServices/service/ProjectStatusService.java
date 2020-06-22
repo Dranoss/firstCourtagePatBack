@@ -4,7 +4,9 @@ import com.patrimoine.website.webServices.entity.Project;
 import com.patrimoine.website.webServices.entity.ProjectStatus;
 import com.patrimoine.website.webServices.repository.ProjectStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +38,11 @@ public class ProjectStatusService {
 
     //Update
     public ProjectStatus put(ProjectStatus projectStatus, Long id){
-        return projectStatusRepository.save(projectStatus);
+        if(id == projectStatus.getId()){
+            return projectStatusRepository.save(projectStatus);
+        }
+        throw new ResponseStatusException(
+                HttpStatus.PRECONDITION_FAILED);
     }
 
     //Delete

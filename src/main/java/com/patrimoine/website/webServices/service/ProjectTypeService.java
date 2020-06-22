@@ -4,7 +4,9 @@ import com.patrimoine.website.webServices.entity.Project;
 import com.patrimoine.website.webServices.entity.ProjectType;
 import com.patrimoine.website.webServices.repository.ProjectTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +38,11 @@ public class ProjectTypeService {
 
     //Update
     public ProjectType updateProjectType(ProjectType projectType, Long id){
-        return projectTypeRepository.save(projectType);
+        if(id == projectType.getId()){
+            return projectTypeRepository.save(projectType);
+        }
+        throw new ResponseStatusException(
+                HttpStatus.PRECONDITION_FAILED);
     }
 
     //Delete
