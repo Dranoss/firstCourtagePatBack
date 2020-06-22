@@ -1,5 +1,7 @@
 package com.patrimoine.website.webServices.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,10 +13,13 @@ public class ProjectType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany(fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "projectType")
     private List<Project> projects;
     @OneToMany(fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "typeStatus")
     private List<ProjectStatus> projectStatuses;
     @OneToMany(fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "projectTypeDocument")
     private List<DocumentType> documentTypes;
     //Properties
     private String name;

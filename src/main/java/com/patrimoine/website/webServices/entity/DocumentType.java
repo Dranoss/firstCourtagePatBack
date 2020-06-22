@@ -1,5 +1,8 @@
 package com.patrimoine.website.webServices.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,8 +14,10 @@ public class DocumentType {
     private Long id;
     private String name;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "documentType")
+    @JsonManagedReference(value = "documentType")
     private List<Document> documents;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "projectTypeDocument")
     @JoinColumn(name = "project_type")
     private ProjectType projectType;
 

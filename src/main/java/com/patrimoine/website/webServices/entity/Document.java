@@ -1,5 +1,7 @@
 package com.patrimoine.website.webServices.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,9 +12,11 @@ public class Document {
     private Long id;
     private String name;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "documentType")
     @JoinColumn(name = "type_id")
     private DocumentType documentType;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "projectDocument")
     @JoinColumn(name = "project_id")
     private Project project;
 
