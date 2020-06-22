@@ -29,7 +29,7 @@ public class User {
    /* @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference(value = "userProject")
     @JoinColumn(name = "project_id")
-    private Project project;
+    private List<Project> projects;
     */
     private String lastName;
     private String firstName;
