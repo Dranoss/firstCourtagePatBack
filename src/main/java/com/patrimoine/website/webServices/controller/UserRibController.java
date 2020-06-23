@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+@CrossOrigin
 @RequestMapping(value = "/user-ribs")
 @RestController
 public class UserRibController {
