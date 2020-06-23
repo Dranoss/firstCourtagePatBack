@@ -12,6 +12,7 @@ import java.util.List;
 
 @RequestMapping(value = "/user-ribs")
 @RestController
+@CrossOrigin
 public class UserRibController {
 
     @Autowired
