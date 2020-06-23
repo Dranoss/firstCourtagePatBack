@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+@CrossOrigin
 @RequestMapping(value = "/user-types")
 @RestController
 public class UserTypeController {
