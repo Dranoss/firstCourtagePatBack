@@ -1,6 +1,7 @@
 package com.patrimoine.website.webServices.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -14,7 +15,7 @@ public class UserRib {
     private String ibanNumber;
     private String bicCode;
     @OneToOne(mappedBy = "userRib")
-    @JsonBackReference(value = "userRib")
+    @JsonManagedReference(value = "userRib")
     private User user;
 
     public UserRib() {

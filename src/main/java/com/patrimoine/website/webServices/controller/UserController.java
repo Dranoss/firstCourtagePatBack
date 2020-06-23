@@ -33,11 +33,7 @@ public class UserController {
     // UPDATE USER
     @PutMapping(value = "/{id}")
     public User putUser(@PathVariable Long id,@RequestBody User user){
-        if(id == user.getId()){
-            return userService.updateUser(user);
-        }
-        throw new ResponseStatusException(
-                HttpStatus.PRECONDITION_FAILED);
+        return userService.updateUser(user, id);
     }
     // DELETE USER{
     @DeleteMapping(value = "/{id}")

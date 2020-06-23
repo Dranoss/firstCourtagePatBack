@@ -37,7 +37,7 @@ public class UserService {
 
     // UPDATE USER
     public User updateUser(User user, Long id){
-        if(id == user.getId()){
+        if(id == user.getId()) {
             return userRepository.save(user);
         }
         throw new ResponseStatusException(
