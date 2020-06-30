@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
-@RequestMapping(value = "/projectStatus")
+@RequestMapping(value = "/project-status")
 @RestController
 public class ProjectStatusController {
 

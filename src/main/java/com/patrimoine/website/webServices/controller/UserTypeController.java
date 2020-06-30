@@ -13,7 +13,6 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping(value = "/user-types")
 @RestController
-@CrossOrigin
 public class UserTypeController {
 
     @Autowired
