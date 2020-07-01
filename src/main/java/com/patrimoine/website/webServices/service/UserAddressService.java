@@ -34,15 +34,17 @@ public class UserAddressService {
 
     public UserAddress updateUserAddress(UserAddress userAddress, Long id){
         if(id == userAddress.getId()) {
-            return userAddressRepository.save(userAddress);
+            UserAddress userAddressUpdated = userAddressRepository.findById(id).get();
+            userAddressUpdated.setStreetNumber(userAddress.getStreetNumber());
+            userAddressUpdated.setStreetName(userAddress.getStreetName());
+            userAddressUpdated.setZipCode(userAddress.getZipCode());
+            userAddressUpdated.setCityName(userAddress.getCityName());
+            return userAddressRepository.save(userAddressUpdated);
         }
         throw new ResponseStatusException(
                 HttpStatus.PRECONDITION_FAILED);
     }
-
     public void deleteUserAddress(Long id){
         userAddressRepository.deleteById(id);
     }
-
-
 }
