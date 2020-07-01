@@ -34,7 +34,12 @@ public class UserRibService {
 
     public UserRib updateUserRib(UserRib userRib, Long id){
         if(id == userRib.getId()) {
-            return userRibRepository.save(userRib);
+            UserRib userRibUpdated = userRibRepository.findById(id).get();
+            userRibUpdated.setOwnerName(userRib.getOwnerName());
+            userRibUpdated.setBankName(userRib.getBankName());
+            userRibUpdated.setIbanNumber(userRib.getIbanNumber());
+            userRibUpdated.setBicCode(userRib.getBicCode());
+            return userRibRepository.save(userRibUpdated);
         }
         throw new ResponseStatusException(
                 HttpStatus.PRECONDITION_FAILED);

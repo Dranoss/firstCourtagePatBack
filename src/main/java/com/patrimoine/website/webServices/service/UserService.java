@@ -38,7 +38,13 @@ public class UserService {
     // UPDATE USER
     public User updateUser(User user, Long id){
         if(id == user.getId()) {
-            return userRepository.save(user);
+            User userUpdated = userRepository.findById(id).get();
+            userUpdated.setLastName(user.getLastName());
+            userUpdated.setFirstName(user.getFirstName());
+            userUpdated.setCompanyName(user.getCompanyName());
+            userUpdated.setEmail(user.getEmail());
+            userUpdated.setPhoneNumber(user.getPhoneNumber());
+            return userRepository.save(userUpdated);
         }
         throw new ResponseStatusException(
                 HttpStatus.PRECONDITION_FAILED);

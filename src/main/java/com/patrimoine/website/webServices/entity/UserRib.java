@@ -10,12 +10,15 @@ public class UserRib {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String bankName;
     private String ownerName;
     private String ibanNumber;
     private String bicCode;
-    @OneToOne(mappedBy = "userRib")
-    @JsonManagedReference(value = "userRib")
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "userRib")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public UserRib() {
