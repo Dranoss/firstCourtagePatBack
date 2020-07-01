@@ -15,11 +15,53 @@ public class UserAddress {
     private String streetName;
     private String zipCode;
     private String cityName;
-    @OneToOne(mappedBy = "userAddress")
-    @JsonManagedReference(value = "userAddress")
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "userAddress")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public UserAddress() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getStreetNumber() {
+        return streetNumber;
+    }
+
+    public void setStreetNumber(int streetNumber) {
+        this.streetNumber = streetNumber;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public User getUser() {
@@ -28,45 +70,5 @@ public class UserAddress {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public int getStreetNumber() {
-        return streetNumber;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setStreetNumber(int streetNumber) {
-        this.streetNumber = streetNumber;
-    }
-
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
     }
 }
