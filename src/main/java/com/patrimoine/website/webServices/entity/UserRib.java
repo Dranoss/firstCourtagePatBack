@@ -1,23 +1,35 @@
 package com.patrimoine.website.webServices.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
 public class UserRib {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rib_id")
     private Long id;
-    @Column(name = "bank_name")
+
     private String bankName;
-    @Column(name = "owner_name")
     private String ownerName;
-    @Column(name = "iban_number")
     private String ibanNumber;
-    @Column(name = "bic_code")
     private String bicCode;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "userRib")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
     public UserRib() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {

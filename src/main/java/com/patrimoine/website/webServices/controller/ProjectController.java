@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RequestMapping(value = "/projects")
 @RestController
 public class ProjectController {
@@ -25,13 +26,13 @@ public class ProjectController {
     }
 
     @PostMapping
-    public void addProject(@RequestBody Project project){
-        projectService.saveProject(project);
+    public Project postProject(@RequestBody Project project){
+        return projectService.saveProject(project);
     }
 
-    @PutMapping
-    public void editProject(@RequestBody Project project){
-        projectService.updateProject(project);
+    @PutMapping(value = "/{id}")
+    public Project putProject(@RequestBody Project project, @PathVariable Long id){
+        return projectService.updateProject(project, id);
     }
 
     @DeleteMapping(value = "/{id}")

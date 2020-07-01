@@ -1,117 +1,157 @@
 package com.patrimoine.website.webServices.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // PRIMARY KEY
-    @Column(name = "user_id")
     private Long id;
-    // FOREIGN KEYS
-    // TO DO OneToMany and ManyToMany
-    // PROPERTIES
-    @Column(name = "last_name")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "userType")
+    @JoinColumn(name = "user_type_id")
+    private UserType userType;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "userAddress")
+    private UserAddress userAddress;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "userRib")
+    private UserRib userRib;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "userProject")
+    private List<Project> projects;
+
     private String lastName;
-    @Column(name = "first_name")
     private String firstName;
-    @Column(name = "email")
     private String email;
-    @Column(name = "password")
     private String password;
-    @Column(name = "phone_number")
     private String phoneNumber;
-    @Column(name = "company_name")
     private String companyName;
-    @Column(name = "siret_number")
     private String siretNumber;
-    @Column(name = "sponsorship_code")
     private String sponsorshipCode;
-    @Column(name = "role")
     private String role;
 
-
     public User() {
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public void setSiretNumber(String siretNumber) {
-        this.siretNumber = siretNumber;
-    }
-
-    public void setSponsorshipCode(String sponsorshipCode) {
-        this.sponsorshipCode = sponsorshipCode;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public UserAddress getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(UserAddress userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    public UserRib getUserRib() {
+        return userRib;
+    }
+
+    public void setUserRib(UserRib userRib) {
+        this.userRib = userRib;
+    }
+
     public String getLastName() {
         return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getCompanyName() {
         return companyName;
     }
 
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     public String getSiretNumber() {
         return siretNumber;
+    }
+
+    public void setSiretNumber(String siretNumber) {
+        this.siretNumber = siretNumber;
     }
 
     public String getSponsorshipCode() {
         return sponsorshipCode;
     }
 
+    public void setSponsorshipCode(String sponsorshipCode) {
+        this.sponsorshipCode = sponsorshipCode;
+    }
+
     public String getRole() {
         return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

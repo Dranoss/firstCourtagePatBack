@@ -1,15 +1,20 @@
 package com.patrimoine.website.webServices.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class UserType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_type_id")
     private Long id;
-    @Column(name = "user_type_name")
     private String name;
+
+    @OneToMany(mappedBy = "userType", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "userType")
+    List<User> users;
 
     public UserType() {
     }
@@ -29,4 +34,14 @@ public class UserType {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+
 }

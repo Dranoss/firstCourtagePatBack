@@ -3,12 +3,16 @@ package com.patrimoine.website.webServices.controller;
 import com.patrimoine.website.webServices.entity.User;
 import com.patrimoine.website.webServices.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMessage;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
@@ -28,12 +32,13 @@ public class UserController {
         return userService.saveUser(user);
     }
     // UPDATE USER
-    @PutMapping
-    public User putUser(@RequestBody User user){
-        return userService.updateUser(user);
+    @PutMapping(value = "/{id}")
+    public User putUser(@PathVariable Long id,@RequestBody User user){
+        return userService.updateUser(user, id);
     }
     // DELETE USER{
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserById(@PathVariable Long id){
         userService.deleteUserById(id);
     }

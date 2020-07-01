@@ -1,24 +1,40 @@
 package com.patrimoine.website.webServices.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Project {
-
-    //Primary Key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //Properties
-    private Long statusId;
-    @Column(name = "project_name")
-    private String projectName;
-    @Column(name = "project_amount")
-    private Long projectAmount;
-    @Column(name = "creation_date")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "projectType")
+    @JoinColumn(name = "type_id")
+    private ProjectType projectType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "projectStatus")
+    @JoinColumn(name = "status_id")
+    private ProjectStatus projectStatus;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "projectDocument")
+    private List<Document> documents;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "userProject")
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private String name;
+    private Long amount;
     private Date creationDate;
-    @Column(name = "closing_date")
     private Date closingDate;
 
     public Project(){}
@@ -31,28 +47,20 @@ public class Project {
         this.id = id;
     }
 
-    public Long getStatusId() {
-        return statusId;
+    public String getName() {
+        return name;
     }
 
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
+    public void setName(String projectName) {
+        this.name = projectName;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public Long getAmount() {
+        return amount;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public Long getProjectAmount() {
-        return projectAmount;
-    }
-
-    public void setProjectAmount(Long projectAmount) {
-        this.projectAmount = projectAmount;
+    public void setAmount(Long projectAmount) {
+        this.amount = projectAmount;
     }
 
     public Date getCreationDate() {
@@ -69,5 +77,37 @@ public class Project {
 
     public void setClosingDate(Date closingDate) {
         this.closingDate = closingDate;
+    }
+
+    public ProjectType getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(ProjectType projectType) {
+        this.projectType = projectType;
+    }
+
+    public ProjectStatus getProjectStatus() {
+        return projectStatus;
+    }
+
+    public void setProjectStatus(ProjectStatus projectStatus) {
+        this.projectStatus = projectStatus;
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
