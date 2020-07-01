@@ -9,26 +9,29 @@ import java.util.List;
 
 @Entity
 public class Project {
-
-    //Primary Key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "projectType")
     @JoinColumn(name = "type_id")
     private ProjectType projectType;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "projectStatus")
     @JoinColumn(name = "status_id")
     private ProjectStatus projectStatus;
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "projectDocument")
     private List<Document> documents;
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JsonBackReference(value = "userProject")
-    //private User user;
-    //Properties
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "userProject")
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private String name;
     private Long amount;
     private Date creationDate;
@@ -100,11 +103,11 @@ public class Project {
         this.documents = documents;
     }
 
-    //public User getUser() {
-      //  return user;
-    //}
+    public User getUser() {
+        return user;
+    }
 
-    //public void setUser(User user) {
-      //  this.user = user;
-    //}
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
