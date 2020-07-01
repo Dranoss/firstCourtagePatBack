@@ -11,19 +11,12 @@ public class UserType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     @OneToMany(mappedBy = "userType", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "userType")
     List<User> users;
 
     public UserType() {
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 
     public Long getId() {
@@ -41,4 +34,14 @@ public class UserType {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+
 }
