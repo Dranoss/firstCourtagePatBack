@@ -12,13 +12,16 @@ public class ProjectStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @OneToMany(fetch = FetchType.LAZY)
     @JsonManagedReference(value = "projectStatus")
     private List<Project> projects;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "typeStatus")
     @JoinColumn(name = "type_id")
     private ProjectType projectType;
+
     private String name;
     private Long ranking;
 
