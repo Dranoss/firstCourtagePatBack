@@ -13,9 +13,11 @@ public class DocumentType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "documentType")
     @JsonManagedReference(value = "documentType")
     private List<Document> documents;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "projectTypeDocument")
     @JoinColumn(name = "project_type")
