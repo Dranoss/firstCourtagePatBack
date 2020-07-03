@@ -7,22 +7,22 @@ import java.util.List;
 
 @Entity
 public class ProjectType {
-
-    //Primary Key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
+
     @OneToMany(fetch = FetchType.LAZY)
     @JsonManagedReference(value = "projectType")
     private List<Project> projects;
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "typeStatus")
     private List<ProjectStatus> projectStatuses;
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "projectTypeDocument")
     private List<DocumentType> documentTypes;
-    //Properties
-    private String name;
 
     public ProjectType() {}
 
