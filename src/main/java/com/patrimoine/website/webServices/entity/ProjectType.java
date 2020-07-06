@@ -1,28 +1,32 @@
 package com.patrimoine.website.webServices.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class ProjectType {
-
-    //Primary Key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonManagedReference(value = "projectType")
+    private String name;
+
+    @OneToMany(mappedBy = "projectType", fetch = FetchType.LAZY)
     private List<Project> projects;
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY)
     @JsonManagedReference(value = "typeStatus")
     private List<ProjectStatus> projectStatuses;
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY)
     @JsonManagedReference(value = "projectTypeDocument")
     private List<DocumentType> documentTypes;
-    //Properties
-    private String name;
 
     public ProjectType() {}
 
