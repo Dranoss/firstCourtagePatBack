@@ -17,6 +17,7 @@ public class ProjectType {
     private Long id;
     private String name;
 
+
     @OneToMany(mappedBy = "projectType", fetch = FetchType.LAZY)
     private List<Project> projects;
 
