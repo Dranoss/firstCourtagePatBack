@@ -17,14 +17,14 @@ public class ProjectType {
     private Long id;
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "projectType", fetch = FetchType.LAZY)
     private List<Project> projects;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY)
     @JsonManagedReference(value = "typeStatus")
     private List<ProjectStatus> projectStatuses;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY)
     @JsonManagedReference(value = "projectTypeDocument")
     private List<DocumentType> documentTypes;
 
