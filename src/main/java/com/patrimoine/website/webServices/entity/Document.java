@@ -11,6 +11,7 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "documentType")
@@ -23,6 +24,11 @@ public class Document {
     private Project project;
 
     public Document() {
+    }
+
+    public Document(String name, String url) {
+        this.name = name;
+        this.url = url;
     }
 
     public Long getId() {
@@ -55,5 +61,13 @@ public class Document {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

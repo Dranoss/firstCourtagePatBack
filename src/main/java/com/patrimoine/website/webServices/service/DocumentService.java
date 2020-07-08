@@ -3,18 +3,82 @@ package com.patrimoine.website.webServices.service;
 import com.patrimoine.website.webServices.entity.Document;
 import com.patrimoine.website.webServices.repository.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class DocumentService {
 
+    @Value("${base-url}")
+    private String baseUrl;
+
     @Autowired
     private DocumentRepository documentRepository;
+
+    public void init() {
+        try {
+            Files.createDirectory(Paths.get("uploads"));
+        } catch (IOException e) {
+            throw new RuntimeException("Could not initialize folder for upload!");
+        }
+    }
+
+    public Document save(MultipartFile file) {
+        try {
+            String randFileName = (new Date()).getTime() + file.getOriginalFilename();
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get("uploads/" + randFileName);
+            // Files.copy(file.getInputStream(), path.resolve(randFileName));
+            Files.write(path, bytes);
+            Document document1 = new Document(randFileName, baseUrl + "/" + randFileName);
+            return documentRepository.save(document1);
+        } catch (Exception e) {
+            throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
+        }
+    }
+
+    /*public Resource load(String name) {
+        try {
+            Path file = root.resolve(name);
+            Resource resource = new UrlResource(file.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }*/
+
+    /*public void deleteAll() {
+        FileSystemUtils.deleteRecursively(root.toFile());
+    }
+
+    public Stream<Path> loadAll() {
+        try {
+            return Files.walk(this.root, 1).filter(path -> !path.equals(this.root)).map(this.root::relativize);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not load the files!");
+        }
+    }*/
 
     //GetAll
     public List<Document> getAll(){
@@ -28,11 +92,6 @@ public class DocumentService {
             return optionalDocument.get();
         }
         return null;
-    }
-
-    //Create
-    public Document create(Document document){
-        return documentRepository.save(document);
     }
 
     //Update
