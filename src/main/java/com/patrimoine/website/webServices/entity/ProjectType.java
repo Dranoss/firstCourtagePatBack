@@ -8,24 +8,25 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+
 public class ProjectType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-
     @OneToMany(mappedBy = "projectType", fetch = FetchType.LAZY)
+    @JsonIdentityInfo(
+            scope = ProjectType.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     private List<Project> projects;
 
-    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "typeStatus")
     private List<ProjectStatus> projectStatuses;
 
-    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "projectTypeDocument")
     private List<DocumentType> documentTypes;
 
