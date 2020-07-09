@@ -42,6 +42,7 @@ public class UserService {
         if(id == user.getId()) {
             User userUpdated = userRepository.findById(id).get();
             userUpdated.setLastName(user.getLastName());
+            userUpdated.setUserType(user.getUserType());
             userUpdated.setFirstName(user.getFirstName());
             userUpdated.setCompanyName(user.getCompanyName());
             userUpdated.setEmail(user.getEmail());
