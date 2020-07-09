@@ -34,7 +34,9 @@ public class UserTypeService {
 
     public UserType updateUserType(UserType userType, Long id){
         if(id == userType.getId()) {
-            return userTypeRepository.save(userType);
+            UserType userTypeUpdated = userTypeRepository.findById(id).get();
+            userTypeUpdated.setName(userType.getName());
+            return userTypeRepository.save(userTypeUpdated);
         }
         throw new ResponseStatusException(
                 HttpStatus.PRECONDITION_FAILED);
