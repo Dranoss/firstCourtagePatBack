@@ -1,7 +1,9 @@
 package com.patrimoine.website.webServices.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,8 +15,11 @@ public class ProjectStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonManagedReference(value = "projectStatus")
+    @OneToMany(mappedBy = "projectStatus", fetch = FetchType.LAZY)
+    @JsonIdentityInfo(
+            scope = ProjectStatus.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     private List<Project> projects;
 
     @ManyToOne(fetch = FetchType.LAZY)
