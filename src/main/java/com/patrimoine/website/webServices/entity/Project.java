@@ -19,6 +19,7 @@ public class Project {
             scope = Project.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     private ProjectType projectType;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -27,6 +28,7 @@ public class Project {
             scope = Project.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     private ProjectStatus projectStatus;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
