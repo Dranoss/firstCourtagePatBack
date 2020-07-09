@@ -1,9 +1,6 @@
 package com.patrimoine.website.webServices.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,6 +16,7 @@ public class User {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_type_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private UserType userType;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
