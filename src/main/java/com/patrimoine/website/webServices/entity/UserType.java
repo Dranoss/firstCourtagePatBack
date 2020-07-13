@@ -16,7 +16,7 @@ public class UserType {
 
     @OneToMany(mappedBy = "userType", cascade = CascadeType.ALL)
     @JsonIdentityInfo(
-            scope = UserType.class,
+            scope = User.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
     List<User> users;
