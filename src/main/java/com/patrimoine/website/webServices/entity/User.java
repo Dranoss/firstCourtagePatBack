@@ -6,9 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +14,10 @@ public class User {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_type_id")
+    @JsonIdentityInfo(
+            scope = User.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     private UserType userType;
 
