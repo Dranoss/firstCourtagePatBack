@@ -14,7 +14,7 @@ public class ProjectStatus {
 
     @OneToMany(mappedBy = "projectStatus", fetch = FetchType.LAZY)
     @JsonIdentityInfo(
-            scope = ProjectStatus.class,
+            scope = Project.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
     private List<Project> projects;
