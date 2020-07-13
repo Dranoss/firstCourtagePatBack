@@ -18,7 +18,7 @@ public class ProjectType {
 
     @OneToMany(mappedBy = "projectType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIdentityInfo(
-            scope = ProjectType.class,
+            scope = Project.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
     private List<Project> projects;
@@ -28,6 +28,7 @@ public class ProjectType {
     @JsonManagedReference(value = "typeStatus")
     private List<ProjectStatus> projectStatuses;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "projectTypeDocument")
     private List<DocumentType> documentTypes;
