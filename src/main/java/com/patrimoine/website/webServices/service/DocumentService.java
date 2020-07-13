@@ -36,10 +36,12 @@ public class DocumentService {
     private DocumentRepository documentRepository;
 
     public void init() {
-        try {
-            Files.createDirectory(Paths.get(rootFolder));
-        } catch (IOException e) {
-            throw new RuntimeException("Could not initialize folder for upload!");
+        if (!Files.exists(Paths.get(rootFolder))){
+            try {
+                Files.createDirectory(Paths.get(rootFolder));
+            } catch (IOException e) {
+                throw new RuntimeException("Could not initialize folder for upload!");
+            }
         }
     }
 
