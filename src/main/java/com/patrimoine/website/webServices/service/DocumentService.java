@@ -38,7 +38,10 @@ public class DocumentService {
     //Update
     public Document update(Document document, Long id){
         if(id == document.getId()){
-            return documentRepository.save(document);
+            Document documentUpdated = documentRepository.findById(id).get();
+            documentUpdated.setName(document.getName());
+            documentUpdated.setUrl((document.getUrl()));
+            return documentRepository.save(documentUpdated);
         }
         throw new ResponseStatusException(
                 HttpStatus.PRECONDITION_FAILED);
