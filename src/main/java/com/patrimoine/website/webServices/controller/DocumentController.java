@@ -46,13 +46,13 @@ public class DocumentController {
         return documentService.getById(id);
     }
 
-   /* @GetMapping("/{documentname:.+}")
+   @GetMapping("/file/{documentname:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getDocument(@PathVariable String documentname) {
         Resource document = documentService.load(documentname);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; documentname=\"" + document.getFilename() + "\"").body(document);
-    }*/
+    }
 
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("document") MultipartFile document) {

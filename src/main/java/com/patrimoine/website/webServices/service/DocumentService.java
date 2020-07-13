@@ -28,12 +28,16 @@ public class DocumentService {
     @Value("${base-url}")
     private String baseUrl;
 
+    @Value("${root-folder}")
+    private String rootFolder;
+
+
     @Autowired
     private DocumentRepository documentRepository;
 
     public void init() {
         try {
-            Files.createDirectory(Paths.get("uploads"));
+            Files.createDirectory(Paths.get(rootFolder));
         } catch (IOException e) {
             throw new RuntimeException("Could not initialize folder for upload!");
         }
@@ -43,7 +47,7 @@ public class DocumentService {
         try {
             String randFileName = (new Date()).getTime() + file.getOriginalFilename();
             byte[] bytes = file.getBytes();
-            Path path = Paths.get("uploads/" + randFileName);
+            Path path = Paths.get(rootFolder+"/" + randFileName);
             // Files.copy(file.getInputStream(), path.resolve(randFileName));
             Files.write(path, bytes);
             Document document1 = new Document(randFileName, baseUrl + "/" + randFileName);
@@ -53,8 +57,9 @@ public class DocumentService {
         }
     }
 
-    /*public Resource load(String name) {
+    public Resource load(String name) {
         try {
+            Path root = Paths.get(rootFolder);
             Path file = root.resolve(name);
             Resource resource = new UrlResource(file.toUri());
 
@@ -66,7 +71,7 @@ public class DocumentService {
         } catch (MalformedURLException e) {
             throw new RuntimeException("Error: " + e.getMessage());
         }
-    }*/
+    }
 
     /*public void deleteAll() {
         FileSystemUtils.deleteRecursively(root.toFile());
