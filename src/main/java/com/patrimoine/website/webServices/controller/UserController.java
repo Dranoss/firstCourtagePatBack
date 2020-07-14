@@ -27,7 +27,7 @@ public class UserController {
         return userService.getUserById(id);
     }
     // POST A NEW USER
-    @PostMapping
+    @PostMapping("/sign-up")
     public User postUser(@RequestBody User user){
         return userService.saveUser(user);
     }
