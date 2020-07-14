@@ -1,26 +1,32 @@
 package com.patrimoine.website.webServices.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "projectType")
-    @JoinColumn(name = "type_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "project_type_id")
+    @JsonIdentityInfo(
+            scope = Project.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     private ProjectType projectType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "projectStatus")
     @JoinColumn(name = "status_id")
+    @JsonIdentityInfo(
+            scope = Project.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     private ProjectStatus projectStatus;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -30,6 +36,7 @@ public class Project {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "userProject")
     @JoinColumn(name = "user_id")
+
     private User user;
 
     private String name;

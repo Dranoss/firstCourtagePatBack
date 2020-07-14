@@ -36,6 +36,11 @@ public class UserController {
     public User putUser(@PathVariable Long id,@RequestBody User user){
         return userService.updateUser(user, id);
     }
+    // CREATE USER PROJECT
+    @PutMapping(value = "/{id}/create-project")
+    public User createUserProject(@PathVariable Long id,@RequestBody User user){
+        return userService.createUserProject(user, id);
+    }
     // DELETE USER{
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

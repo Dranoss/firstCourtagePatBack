@@ -1,22 +1,27 @@
 package com.patrimoine.website.webServices.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "userType")
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_type_id")
     private UserType userType;
 
