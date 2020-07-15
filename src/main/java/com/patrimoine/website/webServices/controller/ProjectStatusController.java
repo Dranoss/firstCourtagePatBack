@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin
 @RequestMapping(value = "/project-status")
 @RestController
 public class ProjectStatusController {

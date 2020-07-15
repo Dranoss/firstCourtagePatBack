@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RequestMapping(value = "/documents")
 @RestController
 public class DocumentController {
