@@ -49,20 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
-   @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        //CONFIGURATION POUR QUE CA FONCTIONNE AVEC localhost:4200
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList(CorsConfiguration.ALL));
-        configuration.setAllowedMethods(Arrays.asList(CorsConfiguration.ALL));
-        configuration.setAllowedHeaders(Arrays.asList(CorsConfiguration.ALL));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
-
-    /* @Bean
+    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(CorsConfiguration.ALL));
@@ -70,13 +57,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowedHeaders(Arrays.asList(CorsConfiguration.ALL));
         List<String> headerExposed = new ArrayList<>();
         headerExposed.add("Authorization");
-        headerExposed.add("authorization");
         configuration.setExposedHeaders(headerExposed);
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-     */
+
 }
 
