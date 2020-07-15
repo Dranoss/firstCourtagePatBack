@@ -1,13 +1,17 @@
 package com.patrimoine.website.webServices.entity;
 
+
 import com.fasterxml.jackson.annotation.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
+public class User implements UserDetails {
 
-public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -48,6 +52,12 @@ public class User {
 
     public User() {
     }
+
+    public <T> User(String email, String password, List<T> emptyList) {
+      this.email = email;
+      this.password = password;
+    }
+
 
     public Long getId() {
         return id;
@@ -106,8 +116,38 @@ public class User {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
