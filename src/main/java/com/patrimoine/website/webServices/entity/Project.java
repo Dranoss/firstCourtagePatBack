@@ -16,17 +16,19 @@ public class Project {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_type_id")
     @JsonIdentityInfo(
-            scope = Project.class,
+            scope = ProjectType.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     private ProjectType projectType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id")
     @JsonIdentityInfo(
-            scope = Project.class,
+            scope = ProjectStatus.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     private ProjectStatus projectStatus;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

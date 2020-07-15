@@ -1,9 +1,6 @@
 package com.patrimoine.website.webServices.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,14 +14,14 @@ public class ProjectStatus {
 
     @OneToMany(mappedBy = "projectStatus", fetch = FetchType.LAZY)
     @JsonIdentityInfo(
-            scope = ProjectStatus.class,
+            scope = Project.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
     private List<Project> projects;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "typeStatus")
-    @JoinColumn(name = "type_id")
+    @JoinColumn(name = "project_type_id")
     private ProjectType projectType;
 
     private String name;

@@ -1,6 +1,7 @@
 package com.patrimoine.website.webServices.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -15,17 +16,19 @@ public class ProjectType {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "projectType", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "projectType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIdentityInfo(
-            scope = ProjectType.class,
+            scope = Project.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
     private List<Project> projects;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "typeStatus")
     private List<ProjectStatus> projectStatuses;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "projectTypeDocument")
     private List<DocumentType> documentTypes;

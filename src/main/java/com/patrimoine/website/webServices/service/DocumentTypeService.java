@@ -39,7 +39,9 @@ public class DocumentTypeService {
     //Update
     public DocumentType update(DocumentType documentType, Long id){
         if(id == documentType.getId()){
-            return documentTypeRepository.save(documentType);
+            DocumentType documentTypeUpdated = documentTypeRepository.findById(id).get();
+            documentTypeUpdated.setName(documentType.getName());
+            return documentTypeRepository.save(documentTypeUpdated);
         }
         throw new ResponseStatusException(
                 HttpStatus.PRECONDITION_FAILED);
