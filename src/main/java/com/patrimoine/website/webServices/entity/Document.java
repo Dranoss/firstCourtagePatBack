@@ -29,14 +29,6 @@ public class Document {
 
     public Document(String name, String url) {
         this.name = name;
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-
-        this.url = url;
     }
 
     public Long getId() {
@@ -55,6 +47,14 @@ public class Document {
         this.name = name;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public DocumentType getDocumentType() {
         return documentType;
     }
@@ -69,13 +69,5 @@ public class Document {
 
     public void setProject(Project project) {
         this.project = project;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }
