@@ -2,6 +2,7 @@ package com.patrimoine.website.core.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.patrimoine.website.webServices.entity.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,9 +19,10 @@ import static com.patrimoine.website.core.security.SecurityConstants.*;
 
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
-
-    public JWTAuthorizationFilter(AuthenticationManager authManager) {
+    UserDetailsServiceImpl userDetailsService;
+    public JWTAuthorizationFilter(AuthenticationManager authManager, UserDetailsServiceImpl userDetailsService) {
         super(authManager);
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -44,12 +46,13 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-            String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
+            String username = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
                     .build()
                     .verify(token.replace(TOKEN_PREFIX, ""))
                     .getSubject();
 
-            if (user != null) {
+            if (username != null) {
+                User user = (User) this.userDetailsService.loadUserByUsername(username);
                 return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
             }
             return null;
