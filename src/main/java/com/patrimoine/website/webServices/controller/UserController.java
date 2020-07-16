@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,6 +16,14 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    // GET CURRENT USER (CONNEXION)
+    @GetMapping("/me")
+    public User getMe() {
+        User user = userService.getMe();
+        user.setProjects(new ArrayList<>());
+        return user;
+    }
     // GET ALL USERS
     @GetMapping
     public List<User> getAllUsers(){
