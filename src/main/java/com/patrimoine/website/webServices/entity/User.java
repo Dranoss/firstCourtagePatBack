@@ -33,7 +33,7 @@ public class User implements UserDetails {
     @JsonManagedReference(value = "userRib")
     private UserRib userRib;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIdentityInfo(
             scope = Project.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
