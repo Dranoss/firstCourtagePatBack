@@ -26,8 +26,16 @@ public class Document {
     public Document() {
     }
 
+
     public Document(String name, String url) {
         this.name = name;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+
         this.url = url;
     }
 

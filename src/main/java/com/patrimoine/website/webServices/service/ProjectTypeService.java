@@ -39,7 +39,10 @@ public class ProjectTypeService {
     //Update
     public ProjectType updateProjectType(ProjectType projectType, Long id){
         if(id == projectType.getId()){
-            return projectTypeRepository.save(projectType);
+            ProjectType projectTypeUpdated = projectTypeRepository.findById(id).get();
+            projectTypeUpdated.setName(projectType.getName());
+            projectTypeUpdated.setProjectStatuses(projectType.getProjectStatuses());
+            return projectTypeRepository.save(projectTypeUpdated);
         }
         throw new ResponseStatusException(
                 HttpStatus.PRECONDITION_FAILED);

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RequestMapping(value = "/project-types")
 @RestController
 public class ProjectTypeController {

@@ -8,9 +8,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class UserType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +15,10 @@ public class UserType {
     private String name;
 
     @OneToMany(mappedBy = "userType", cascade = CascadeType.ALL)
+    @JsonIdentityInfo(
+            scope = User.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     List<User> users;
 
     public UserType() {

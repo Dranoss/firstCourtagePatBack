@@ -1,6 +1,7 @@
 package com.patrimoine.website.webServices.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -8,24 +9,27 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+
 public class ProjectType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-
-    @OneToMany(mappedBy = "projectType", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "projectType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIdentityInfo(
+            scope = Project.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     private List<Project> projects;
 
-    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "typeStatus")
     private List<ProjectStatus> projectStatuses;
 
-    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "projectTypeDocument")
     private List<DocumentType> documentTypes;
 
