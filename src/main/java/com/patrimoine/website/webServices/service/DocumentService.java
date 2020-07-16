@@ -8,7 +8,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -74,18 +73,6 @@ public class DocumentService {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
-
-    /*public void deleteAll() {
-        FileSystemUtils.deleteRecursively(root.toFile());
-    }
-
-    public Stream<Path> loadAll() {
-        try {
-            return Files.walk(this.root, 1).filter(path -> !path.equals(this.root)).map(this.root::relativize);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not load the files!");
-        }
-    }*/
 
     //GetAll
     public List<Document> getAll(){
