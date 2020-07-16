@@ -57,6 +57,7 @@ public class UserService {
             userUpdated.setCompanyName(user.getCompanyName());
             userUpdated.setEmail(user.getEmail());
             userUpdated.setPhoneNumber(user.getPhoneNumber());
+            userUpdated.setSponsorshipCode(user.getSponsorshipCode());
             return userRepository.save(userUpdated);
         }
         throw new ResponseStatusException(
