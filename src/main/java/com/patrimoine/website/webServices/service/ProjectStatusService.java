@@ -39,7 +39,10 @@ public class ProjectStatusService {
     //Update
     public ProjectStatus put(ProjectStatus projectStatus, Long id){
         if(id == projectStatus.getId()){
-            return projectStatusRepository.save(projectStatus);
+            ProjectStatus projectStatusUpdated = projectStatusRepository.findById(id).get();
+            projectStatusUpdated.setName(projectStatus.getName());
+            projectStatusUpdated.setRanking(projectStatus.getRanking());
+            return projectStatusRepository.save(projectStatusUpdated);
         }
         throw new ResponseStatusException(
                 HttpStatus.PRECONDITION_FAILED);

@@ -1,26 +1,35 @@
 package com.patrimoine.website.webServices.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+
 public class ProjectType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonManagedReference(value = "projectType")
+    @OneToMany(mappedBy = "projectType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIdentityInfo(
+            scope = Project.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     private List<Project> projects;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "typeStatus")
     private List<ProjectStatus> projectStatuses;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToMany(mappedBy = "projectType",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "projectTypeDocument")
     private List<DocumentType> documentTypes;
 

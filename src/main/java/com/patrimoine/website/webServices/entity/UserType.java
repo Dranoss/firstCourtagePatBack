@@ -1,6 +1,8 @@
 package com.patrimoine.website.webServices.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,7 +15,10 @@ public class UserType {
     private String name;
 
     @OneToMany(mappedBy = "userType", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "userType")
+    @JsonIdentityInfo(
+            scope = User.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     List<User> users;
 
     public UserType() {

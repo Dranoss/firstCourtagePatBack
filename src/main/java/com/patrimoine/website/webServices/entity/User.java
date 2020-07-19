@@ -1,20 +1,28 @@
 package com.patrimoine.website.webServices.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import com.fasterxml.jackson.annotation.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User {
+public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "userType")
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_type_id")
+    @JsonIdentityInfo(
+            scope = UserType.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     private UserType userType;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -25,8 +33,11 @@ public class User {
     @JsonManagedReference(value = "userRib")
     private UserRib userRib;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "userProject")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIdentityInfo(
+            scope = Project.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     private List<Project> projects;
 
     private String lastName;
@@ -41,6 +52,13 @@ public class User {
 
     public User() {
     }
+
+    public <T> User(String email, String password, Long id, List<T> emptyList) {
+      this.email = email;
+      this.password = password;
+      this.id = id;
+    }
+
 
     public Long getId() {
         return id;
@@ -99,8 +117,38 @@ public class User {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
