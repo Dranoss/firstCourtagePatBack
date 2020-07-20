@@ -23,19 +23,6 @@ public class DocumentController {
     @Autowired
     private DocumentService documentService;
 
-    /*@GetMapping
-    public ResponseEntity<List<Document>> getDocumentList() {
-        List<Document> documents = documentService.loadAll().map(path -> {
-            String name = path.getFileName().toString();
-            String url = MvcUriComponentsBuilder
-                    .fromMethodName(DocumentController.class, "getFile", path.getFileName().toString()).build().toString();
-
-            return new Document(name, url);
-        }).collect(Collectors.toList());
-
-        return ResponseEntity.status(HttpStatus.OK).body(documents);
-    }*/
-
     @GetMapping
     public List<Document> getAll(){
        return documentService.getAll();

@@ -8,7 +8,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,7 +19,6 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 public class DocumentService {
@@ -50,7 +48,6 @@ public class DocumentService {
             String randFileName = (new Date()).getTime() + file.getOriginalFilename();
             byte[] bytes = file.getBytes();
             Path path = Paths.get(rootFolder+"/" + randFileName);
-            // Files.copy(file.getInputStream(), path.resolve(randFileName));
             Files.write(path, bytes);
             Document document1 = new Document(randFileName, baseUrl + "/" + randFileName);
             return documentRepository.save(document1);
@@ -74,18 +71,6 @@ public class DocumentService {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
-
-    /*public void deleteAll() {
-        FileSystemUtils.deleteRecursively(root.toFile());
-    }
-
-    public Stream<Path> loadAll() {
-        try {
-            return Files.walk(this.root, 1).filter(path -> !path.equals(this.root)).map(this.root::relativize);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not load the files!");
-        }
-    }*/
 
     //GetAll
     public List<Document> getAll(){
