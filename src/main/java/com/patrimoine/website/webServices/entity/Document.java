@@ -29,6 +29,7 @@ public class Document {
 
     public Document(String name, String url) {
         this.name = name;
+        this.url = url;
     }
 
     public Long getId() {
@@ -70,4 +71,6 @@ public class Document {
     public void setProject(Project project) {
         this.project = project;
     }
+
+
 }
