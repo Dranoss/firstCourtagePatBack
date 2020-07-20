@@ -3,9 +3,12 @@ package com.patrimoine.website.webServices.entity;
 
 import com.fasterxml.jackson.annotation.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -119,7 +122,10 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if(role == null){
+            return null;
+        }
+        return new ArrayList<>(Arrays.asList(new SimpleGrantedAuthority(role)));
     }
 
     public String getPassword() {

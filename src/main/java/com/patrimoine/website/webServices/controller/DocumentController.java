@@ -8,6 +8,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,16 +22,16 @@ public class DocumentController {
     private DocumentService documentService;
 
     @GetMapping
-    public List<Document> getAll(){
-       return documentService.getAll();
+    public List<Document> getAll() {
+        return documentService.getAll();
     }
 
     @GetMapping(value = "/{id}")
-    public Document getById(@PathVariable Long id){
+    public Document getById(@PathVariable Long id) {
         return documentService.getById(id);
     }
 
-   @GetMapping("/file/{documentname:.+}")
+    @GetMapping("/file/{documentname:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getDocument(@PathVariable String documentname) {
         Resource document = documentService.load(documentname);
@@ -54,12 +55,13 @@ public class DocumentController {
     }
 
     @PutMapping(value = "/{id}")
-    public Document put(@RequestBody Document document, @PathVariable Long id){
+    public Document put(@RequestBody Document document, @PathVariable Long id) {
         return documentService.update(document, id);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable Long id){
+    @PreAuthorize("hasAuthority('admin')")
+    public void delete(@PathVariable Long id) {
         documentService.delete(id);
     }
 }
