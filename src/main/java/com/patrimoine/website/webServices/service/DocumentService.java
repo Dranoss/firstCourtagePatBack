@@ -19,7 +19,6 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 public class DocumentService {
@@ -49,7 +48,6 @@ public class DocumentService {
             String randFileName = (new Date()).getTime() + file.getOriginalFilename();
             byte[] bytes = file.getBytes();
             Path path = Paths.get(rootFolder+"/" + randFileName);
-            // Files.copy(file.getInputStream(), path.resolve(randFileName));
             Files.write(path, bytes);
             Document document1 = new Document(randFileName, baseUrl + "/" + randFileName);
             return documentRepository.save(document1);

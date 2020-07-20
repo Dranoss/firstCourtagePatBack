@@ -21,7 +21,6 @@ public class WebsiteGestionPatrimoineApplication implements CommandLineRunner, W
 
 	@Override
 	public void run(String... arg) throws Exception {
-		// documentService.deleteAll();
 		documentService.init();
 	}
 
