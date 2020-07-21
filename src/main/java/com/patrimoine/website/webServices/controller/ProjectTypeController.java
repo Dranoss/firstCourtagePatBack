@@ -3,12 +3,14 @@ package com.patrimoine.website.webServices.controller;
 import com.patrimoine.website.webServices.entity.ProjectType;
 import com.patrimoine.website.webServices.service.ProjectTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping(value = "/project-types")
 @RestController
+@PreAuthorize("hasAuthority('admin')")
 public class ProjectTypeController {
 
     @Autowired

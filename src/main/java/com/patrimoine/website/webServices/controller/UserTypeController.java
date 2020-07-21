@@ -5,6 +5,7 @@ import com.patrimoine.website.webServices.entity.UserType;
 import com.patrimoine.website.webServices.service.UserTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RequestMapping(value = "/user-types")
 @RestController
+@PreAuthorize("hasAuthority('admin')")
 public class UserTypeController {
 
     @Autowired

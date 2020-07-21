@@ -4,6 +4,7 @@ import com.patrimoine.website.webServices.entity.UserAddress;
 import com.patrimoine.website.webServices.service.UserAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RequestMapping(value = "/user-addresses")
 @RestController
+@PreAuthorize("hasAuthority('admin')")
 public class UserAddressController {
 
     @Autowired

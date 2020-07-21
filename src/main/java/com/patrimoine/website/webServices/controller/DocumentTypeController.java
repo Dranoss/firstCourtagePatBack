@@ -3,12 +3,14 @@ package com.patrimoine.website.webServices.controller;
 import com.patrimoine.website.webServices.entity.DocumentType;
 import com.patrimoine.website.webServices.service.DocumentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping(value = "/document-types")
 @RestController
+@PreAuthorize("hasAuthority('admin')")
 public class DocumentTypeController {
 
     @Autowired
@@ -35,6 +37,7 @@ public class DocumentTypeController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAuthority('user') or hasAuthority('admin')" )
     public void delete(@PathVariable Long id){
         documentTypeService.delete(id);
     }

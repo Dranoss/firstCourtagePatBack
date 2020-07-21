@@ -5,6 +5,7 @@ import com.patrimoine.website.webServices.entity.UserType;
 import com.patrimoine.website.webServices.service.UserRibService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RequestMapping(value = "/user-ribs")
 @RestController
+@PreAuthorize("hasAuthority('admin')")
 public class UserRibController {
 
     @Autowired
@@ -34,7 +36,7 @@ public class UserRibController {
 
     @PutMapping(value = "/{id}")
     public UserRib putUserRib(@PathVariable Long id, @RequestBody UserRib userRib){
-        if(id == userRib.getId()){
+        if(id.equals(userRib.getId())){
             return userRibService.updateUserRib(userRib, id);
         }
         throw new ResponseStatusException(
