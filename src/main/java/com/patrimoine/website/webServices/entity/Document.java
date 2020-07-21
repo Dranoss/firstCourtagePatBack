@@ -1,6 +1,9 @@
 package com.patrimoine.website.webServices.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
@@ -14,8 +17,12 @@ public class Document {
     private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "documentType")
     @JoinColumn(name = "type_id")
+    @JsonIdentityInfo(
+            scope = DocumentType.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     private DocumentType documentType;
 
     @ManyToOne(fetch = FetchType.LAZY)
