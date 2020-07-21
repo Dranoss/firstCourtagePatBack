@@ -43,13 +43,16 @@ public class DocumentService {
         }
     }
 
-    public Document save(MultipartFile file) {
+    public Document save(MultipartFile file, Long id) {
         try {
             String randFileName = (new Date()).getTime() + file.getOriginalFilename();
             byte[] bytes = file.getBytes();
             Path path = Paths.get(rootFolder+"/" + randFileName);
             Files.write(path, bytes);
-            Document document1 = new Document(randFileName, baseUrl + "/" + randFileName);
+            // Document document1 = new Document(randFileName, baseUrl + "/" + randFileName);
+            Document document1 = documentRepository.findById(id).get();
+            document1.setName(randFileName);
+            document1.setUrl(baseUrl + "/" + randFileName);
             return documentRepository.save(document1);
         } catch (Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
@@ -71,6 +74,7 @@ public class DocumentService {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
+
 
     //GetAll
     public List<Document> getAll(){

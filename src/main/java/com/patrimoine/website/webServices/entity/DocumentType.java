@@ -1,7 +1,9 @@
 package com.patrimoine.website.webServices.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +17,11 @@ public class DocumentType {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "documentType")
-    @JsonManagedReference(value = "documentType")
+    // @JsonManagedReference(value = "documentType")
+    @JsonIdentityInfo(
+            scope = Document.class,
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     private List<Document> documents;
 
     @ManyToOne(fetch = FetchType.LAZY)
