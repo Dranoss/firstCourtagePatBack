@@ -34,7 +34,13 @@ public class ProjectService {
 
     public Project updateProject(Project project, Long id){
         if(id == project.getId()){
-            return projectRepository.save(project);
+            Project projectUpdated = projectRepository.findById(id).get();
+            projectUpdated.setAmount(project.getAmount());
+            projectUpdated.setCreationDate(project.getCreationDate());
+            projectUpdated.setClosingDate(project.getClosingDate());
+            projectUpdated.setName(project.getName());
+            projectUpdated.setProjectStatus(project.getProjectStatus());
+            return projectRepository.save(projectUpdated);
         }
         throw new ResponseStatusException(
                 HttpStatus.PRECONDITION_FAILED);
