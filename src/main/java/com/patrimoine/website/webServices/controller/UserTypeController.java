@@ -13,7 +13,6 @@ import java.util.List;
 
 @RequestMapping(value = "/user-types")
 @RestController
-@PreAuthorize("hasAuthority('admin')")
 public class UserTypeController {
 
     @Autowired
@@ -30,17 +29,20 @@ public class UserTypeController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('admin')")
     public UserType addUserType(@RequestBody UserType userType){
         return userTypeService.saveUserType(userType);
     }
 
     @PutMapping(value = "/{id}")
+    @PreAuthorize("hasAuthority('admin')")
     public UserType putUserType(@PathVariable Long id, @RequestBody UserType userType){
         return userTypeService.updateUserType(userType, id);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAuthority('admin')")
     public void deleteUserTypeById(@PathVariable Long id){
         userTypeService.deleteUserTypeById(id);
     }

@@ -26,10 +26,8 @@ public class Document {
     private DocumentType documentType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIdentityInfo(
-             generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonBackReference(value = "projectDocument")
+    @JoinColumn(name = "project_id")
     private Project project;
 
     public Document() {

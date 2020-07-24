@@ -30,27 +30,23 @@ public class UserController {
     // GET ALL USERS
     @GetMapping
     @PreAuthorize("hasAuthority('admin')")
-    public List<User> getAllUsers(){
-
-        return userService.getAllUsers();
-    }
+    public List<User> getAllUsers(){ return userService.getAllUsers(); }
 
     //GET USER BY ID
     @GetMapping(value = "/{id}")
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('user')")
     public User getUserById(@PathVariable Long id)  throws AccessDeniedException  {
 
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (!currentUser.getRole().equals("admin") && !currentUser.getId().equals(id)){
+        if (  currentUser.getRole().equals("user")  &&  !currentUser.getId().equals(id)) {
             throw new AccessDeniedException("Vous n'êtes pas autorisé a accéder cette ressource");
         }
-
         return userService.getUserById(id);
-
     }
 
     // POST A NEW USER
     @PostMapping("/sign-up")
-  //  @PreAuthorize("hasAuthority('admin')")
+    @PreAuthorize("hasAuthority('admin')")
     public User postUser(@RequestBody User user){
         return userService.saveUser(user);
     }
@@ -68,6 +64,7 @@ public class UserController {
     public User createUserProject(@PathVariable Long id,@RequestBody User user){
         return userService.createUserProject(user, id);
     }
+
     // DELETE USER{
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

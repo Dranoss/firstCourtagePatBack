@@ -10,7 +10,6 @@ import java.util.List;
 
 @RequestMapping(value = "/project-types")
 @RestController
-@PreAuthorize("hasAuthority('admin')")
 public class ProjectTypeController {
 
     @Autowired
@@ -27,16 +26,19 @@ public class ProjectTypeController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('admin')")
     public ProjectType postProjectType(@RequestBody ProjectType projectType){
         return projectTypeService.createProjectType(projectType);
     }
 
     @PutMapping(value = "/{id}")
+    @PreAuthorize("hasAuthority('admin')")
     public ProjectType putProjectType(@RequestBody ProjectType projectType, @PathVariable Long id){
         return projectTypeService.updateProjectType(projectType, id);
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAuthority('admin')")
     public void deleteProjectType(@PathVariable Long id){
         projectTypeService.deleteProjectType(id);
     }

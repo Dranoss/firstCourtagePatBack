@@ -20,13 +20,13 @@ import java.util.List;
 
 @RequestMapping(value = "/documents")
 @RestController
-@PreAuthorize("hasAuthority('admin')")
 public class DocumentController {
 
 	@Autowired
 	private DocumentService documentService;
 
 	@GetMapping
+	@PreAuthorize("hasAuthority('admin')")
 	public List<Document> getAll() {
 		return documentService.getAll();
 	}
@@ -37,15 +37,11 @@ public class DocumentController {
 
 		User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Document document = documentService.getById(id);
-
-		if (!currentUser.getRole().equals("admin") && !(document.getProject()).getUser().getId().equals(currentUser.getId())) {
+		if ( !currentUser.getRole().equals("admin") ||  !(document.getProject()).getUser().getId().equals(currentUser.getId())) {
 			throw new AccessDeniedException("Vous n'êtes pas autorisé a accéder cette ressource");
 		}
-
-
 		return document;
 	}
-
 
 	@GetMapping("/file/{documentname:.+}")
 	@ResponseBody
@@ -72,7 +68,6 @@ public class DocumentController {
 		String message = "";
 		try {
 			documentService.save(document, id);
-
 			message = "Uploaded the file successfully: " + document.getOriginalFilename();
 			return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
 		} catch (Exception e) {

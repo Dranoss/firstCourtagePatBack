@@ -10,7 +10,6 @@ import java.util.List;
 
 @RequestMapping(value = "/document-types")
 @RestController
-@PreAuthorize("hasAuthority('admin')")
 public class DocumentTypeController {
 
     @Autowired
@@ -27,17 +26,19 @@ public class DocumentTypeController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('admin')")
     public DocumentType post(@RequestBody DocumentType documentType){
         return documentTypeService.create(documentType);
     }
 
     @PutMapping(value = "/{id}")
+    @PreAuthorize("hasAuthority('admin')")
     public DocumentType put(@RequestBody DocumentType documentType, @PathVariable Long id){
         return documentTypeService.update(documentType, id);
     }
 
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasAuthority('user') or hasAuthority('admin')" )
+    @PreAuthorize("hasAuthority('admin')" )
     public void delete(@PathVariable Long id){
         documentTypeService.delete(id);
     }
