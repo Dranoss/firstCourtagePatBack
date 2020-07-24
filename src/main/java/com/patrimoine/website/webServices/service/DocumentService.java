@@ -89,6 +89,10 @@ public class DocumentService {
         return null;
     }
 
+    public Document getByName(String name){
+       return  documentRepository.findByName(name);
+    }
+
     //Update
     public Document update(Document document, Long id){
         if(id == document.getId()){

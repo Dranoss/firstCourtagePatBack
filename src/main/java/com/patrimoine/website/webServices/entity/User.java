@@ -56,8 +56,9 @@ public class User implements UserDetails {
     public User() {
     }
 
+
     public <T> User(String email, String password, Long id, List<T> emptyList) {
-      this.email = email;
+        this.email = email;
       this.password = password;
       this.id = id;
     }

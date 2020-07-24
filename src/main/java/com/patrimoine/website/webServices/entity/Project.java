@@ -32,7 +32,10 @@ public class Project {
     private ProjectStatus projectStatus;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "projectDocument")
+    @JsonIdentityInfo(
+             generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Document> documents;
 
     @ManyToOne(fetch = FetchType.LAZY)

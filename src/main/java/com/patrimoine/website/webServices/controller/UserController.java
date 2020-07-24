@@ -31,6 +31,7 @@ public class UserController {
     @GetMapping
     @PreAuthorize("hasAuthority('admin')")
     public List<User> getAllUsers(){
+
         return userService.getAllUsers();
     }
 
@@ -49,7 +50,7 @@ public class UserController {
 
     // POST A NEW USER
     @PostMapping("/sign-up")
-    @PreAuthorize("hasAuthority('admin')")
+  //  @PreAuthorize("hasAuthority('admin')")
     public User postUser(@RequestBody User user){
         return userService.saveUser(user);
     }
