@@ -45,11 +45,16 @@ public class DocumentController {
         return document;
     }
 
+
     @GetMapping("/file/{documentname:.+}")
     @ResponseBody
     @PreAuthorize("hasAuthority('admin') or hasAuthority('user') ")
     public ResponseEntity<Resource> getDocument(@PathVariable String documentname) {
+
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         Resource document = documentService.load(documentname);
+
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; documentname=\"" + document.getFilename() + "\"").body(document);
     }
