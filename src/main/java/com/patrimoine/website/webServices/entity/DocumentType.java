@@ -16,14 +16,14 @@ public class DocumentType {
     private Long id;
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "documentType")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "documentType")
     @JsonIdentityInfo(
             scope = Document.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
     private List<Document> documents;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference(value = "projectTypeDocument")
     @JoinColumn(name = "project_type")
     private ProjectType projectType;
