@@ -30,7 +30,7 @@ public class DocumentController {
         return documentService.getById(id);
     }
 
-   @GetMapping("/file/{documentname:.+}")
+    @GetMapping("/file/{documentname:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getDocument(@PathVariable String documentname) {
         Resource document = documentService.load(documentname);
@@ -38,11 +38,11 @@ public class DocumentController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; documentname=\"" + document.getFilename() + "\"").body(document);
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("document") MultipartFile document) {
+    @PostMapping("/upload/{id}")
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("document") MultipartFile document, @PathVariable Long id) {
         String message = "";
         try {
-            documentService.save(document);
+            documentService.save(document, id);
 
             message = "Uploaded the file successfully: " + document.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));

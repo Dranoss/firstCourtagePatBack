@@ -10,5 +10,6 @@ import java.io.IOException;
 
 @Configuration
 @EnableWebMvc
-public class StaticConfig implements WebMvcConfigurer {
+public class StaticConfiguration implements WebMvcConfigurer {
+
 }
