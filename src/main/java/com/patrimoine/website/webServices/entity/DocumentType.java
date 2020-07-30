@@ -17,7 +17,6 @@ public class DocumentType {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "documentType")
-    // @JsonManagedReference(value = "documentType")
     @JsonIdentityInfo(
             scope = Document.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,

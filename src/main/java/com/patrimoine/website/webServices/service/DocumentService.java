@@ -49,7 +49,6 @@ public class DocumentService {
             byte[] bytes = file.getBytes();
             Path path = Paths.get(rootFolder+"/" + randFileName);
             Files.write(path, bytes);
-            // Document document1 = new Document(randFileName, baseUrl + "/" + randFileName);
             Document document1 = documentRepository.findById(id).get();
             document1.setName(randFileName);
             document1.setUrl(baseUrl + "/" + randFileName);

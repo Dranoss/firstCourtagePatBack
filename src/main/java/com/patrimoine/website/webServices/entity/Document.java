@@ -17,7 +17,6 @@ public class Document {
     private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    // @JsonBackReference(value = "documentType")
     @JoinColumn(name = "type_id")
     @JsonIdentityInfo(
             scope = DocumentType.class,
