@@ -16,7 +16,7 @@ public class DocumentType {
     private Long id;
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "documentType")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentType")
     @JsonIdentityInfo(
             scope = Document.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
