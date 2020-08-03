@@ -1,5 +1,6 @@
 package com.patrimoine.website.webServices.service;
 
+import com.patrimoine.website.webServices.entity.Document;
 import com.patrimoine.website.webServices.entity.Project;
 import com.patrimoine.website.webServices.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class ProjectService {
     }
 
     public Project saveProject(Project project){
+        for (Document document: project.getDocuments()) {
+            document.setProject(project);
+        }
         return projectRepository.save(project);
     }
 
