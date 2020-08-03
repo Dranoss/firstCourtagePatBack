@@ -21,6 +21,7 @@ public class ProjectType {
             scope = Project.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Project> projects;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
