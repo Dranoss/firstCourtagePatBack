@@ -11,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 @RequestMapping(value = "/documents")
 @RestController
 public class DocumentController {
@@ -20,23 +18,14 @@ public class DocumentController {
     @Autowired
     private DocumentService documentService;
 
-    @GetMapping
-    public List<Document> getAll(){
-       return documentService.getAll();
-    }
-
-    @GetMapping(value = "/{id}")
-    public Document getById(@PathVariable Long id){
-        return documentService.getById(id);
-    }
-
-    @GetMapping("/file/{documentname:.+}")
+    @GetMapping("/file/{id}/{filename:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> getDocument(@PathVariable String documentname) {
-        Resource document = documentService.load(documentname);
+    public ResponseEntity<Resource> getFile(@PathVariable String filename, @PathVariable String id) {
+        Resource document = documentService.load(filename, id);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; documentname=\"" + document.getFilename() + "\"").body(document);
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; getFile=\"" + document.getFilename() + "\"").body(document);
     }
+
 
     @PostMapping("/upload/{id}")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("document") MultipartFile document, @PathVariable Long id) {
