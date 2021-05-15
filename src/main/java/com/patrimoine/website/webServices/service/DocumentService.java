@@ -16,7 +16,6 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,25 +44,23 @@ public class DocumentService {
 
     public Document save(MultipartFile file, Long id) {
         try {
-            String randFileName = (new Date()).getTime() + file.getOriginalFilename();
+            Document document1 = documentRepository.findById(id).get();
+            String randFileName = document1.getName() + "_" + document1.getId();
             byte[] bytes = file.getBytes();
             Path path = Paths.get(rootFolder+"/" + randFileName);
             Files.write(path, bytes);
-            Document document1 = documentRepository.findById(id).get();
-            document1.setName(randFileName);
-            document1.setUrl(baseUrl + "/" + randFileName);
+            document1.setUrl(baseUrl + "/" + document1.getName());
             return documentRepository.save(document1);
         } catch (Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }
     }
 
-    public Resource load(String name) {
+    public Resource load(String name, String id) {
         try {
             Path root = Paths.get(rootFolder);
-            Path file = root.resolve(name);
+            Path file = root.resolve(name + "_" + id);
             Resource resource = new UrlResource(file.toUri());
-
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             } else {
