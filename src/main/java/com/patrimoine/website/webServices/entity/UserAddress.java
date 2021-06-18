@@ -11,7 +11,6 @@ public class UserAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int streetNumber;
     private String streetName;
     private String zipCode;
     private String cityName;
@@ -30,14 +29,6 @@ public class UserAddress {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getStreetNumber() {
-        return streetNumber;
-    }
-
-    public void setStreetNumber(int streetNumber) {
-        this.streetNumber = streetNumber;
     }
 
     public String getStreetName() {

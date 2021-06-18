@@ -35,7 +35,6 @@ public class UserAddressService {
     public UserAddress updateUserAddress(UserAddress userAddress, Long id){
         if(id == userAddress.getId()) {
             UserAddress userAddressUpdated = userAddressRepository.findById(id).get();
-            userAddressUpdated.setStreetNumber(userAddress.getStreetNumber());
             userAddressUpdated.setStreetName(userAddress.getStreetName());
             userAddressUpdated.setZipCode(userAddress.getZipCode());
             userAddressUpdated.setCityName(userAddress.getCityName());

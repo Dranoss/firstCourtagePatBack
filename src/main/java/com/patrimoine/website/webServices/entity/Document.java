@@ -17,7 +17,6 @@ public class Document {
     private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id")
     @JsonIdentityInfo(
             scope = DocumentType.class,
             generator = ObjectIdGenerators.PropertyGenerator.class,
